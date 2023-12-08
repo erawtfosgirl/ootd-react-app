@@ -6,7 +6,7 @@ import { Collection } from '../../sections/home/Collection'
 import { Information } from '../../sections/home/Information'
 import { Newsletter } from '../../sections/home/Newsletter'
 
-export const Home = () => {
+export const HomePage = () => {
     return (
         <>
             <Banner />
