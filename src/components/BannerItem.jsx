@@ -11,6 +11,5 @@ export const BannerItem = ({ name, image }) => {
                 </div>
             </div>
         </div>
-
     )
 }
