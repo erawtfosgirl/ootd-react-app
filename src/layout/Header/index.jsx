@@ -30,7 +30,6 @@ export const Header = () => {
   const headerClassName = isSticky ? 'site-header sticky' : (isHomePage? 'site-header':'site-header sticky');
 
 
-
   return (
     <header className={headerClassName}>
       <div className="container">

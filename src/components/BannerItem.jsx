@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 export const BannerItem = ({ id, name, image }) => {
     return (
@@ -7,7 +8,7 @@ export const BannerItem = ({ id, name, image }) => {
             <div className="slider-content text-center">
                 <h1>{name}</h1>
                 <div className="shop-btn">
-                    <a href="#shop">SHOP</a>
+                    <NavLink to="/shop">SHOP</NavLink>
                 </div>
             </div>
         </div>
