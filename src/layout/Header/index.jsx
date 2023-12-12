@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
+
 import { ReactComponent as LogoSvg } from '../../assets/icons/logo.svg'
 import { ReactComponent as WishlistSvg } from '../../assets/icons/wishlist.svg'
 import { ReactComponent as CartSvg } from '../../assets/icons/cart.svg'
@@ -10,50 +12,50 @@ import { ReactComponent as ResetSvg } from '../../assets/icons/reset.svg'
 export const Header = () => {
 
   const [isSticky, setIsSticky] = useState(false);
+  const { pathname } = useLocation(); // Get current location from React Router
+  const isHomePage = pathname === '/'; // Check if it's the home page
+
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 250) {
-        setIsSticky(true)
-      }
-      else {
-        setIsSticky(false)
-      }
+      setIsSticky(isHomePage && window.scrollY > 250)
     }
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     }
-  }, [])
+  }, [isHomePage])
 
 
-  const headerClassName = isSticky ? 'site-header sticky' : 'site-header';
+  const headerClassName = isSticky ? 'site-header sticky' : (isHomePage? 'site-header':'site-header sticky');
+
+
 
   return (
     <header className={headerClassName}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 header-logo">
-            <a href="index.html">
+            <NavLink to="/">
               <LogoSvg />
-            </a>
+            </NavLink>
           </div>
           <nav className="col-xl-6 col-lg-7 header-nav">
             <ul className="d-flex justify-content-end align-items-center gap-5">
               <li>
-                <a href="index.html">Home</a>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <a href="shop.html">Shop</a>
+                <NavLink to="/shop">Shop</NavLink>
               </li>
               <li>
-                <a href="about.html">About</a>
+                <NavLink to="/about">About</NavLink>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <NavLink to="/contact">Contact</NavLink>
               </li>
               <li>
-                <a href="faq.html">FAQ</a>
+                <NavLink to="/faq">Faq</NavLink>
               </li>
             </ul>
           </nav>
@@ -65,19 +67,19 @@ export const Header = () => {
               </button>
             </div>
             <div className="wishlist">
-              <a href="wishlist.html">
+              <NavLink to="/wishlist">
                 <WishlistSvg />
-              </a>
+              </NavLink>
             </div>
             <div className="cart">
-              <a href="cart.html">
+              <NavLink to="/cart">
                 <CartSvg />
-              </a>
+              </NavLink>
             </div>
             <div className="user">
-              <a href="login.html">
+              <NavLink to="/signin">
                 <UserSvg />
-              </a>
+              </NavLink>
             </div>
             <div className="hamburger">
               <MenuSvg />
@@ -91,22 +93,19 @@ export const Header = () => {
             </div>
             <ul className="menu-list">
               <li>
-                <a href="index.html">Home</a>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <a href="shop.html">Shop</a>
+                <NavLink to="/shop">Shop</NavLink>
               </li>
               <li>
-                <a href="about.html">About</a>
+                <NavLink to="/about">About</NavLink>
               </li>
               <li>
-                <a href="cart.html">Cart</a>
+                <NavLink to="/contact">Contact</NavLink>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
-              </li>
-              <li>
-                <a href="faq.html">FAQs</a>
+                <NavLink to="/faq">Faq</NavLink>
               </li>
             </ul>
           </div>
