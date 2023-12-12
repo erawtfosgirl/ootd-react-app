@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const BannerItem = ({ name, image }) => {
+export const BannerItem = ({ id, name, image }) => {
     return (
         <div className="slider-item">
             <img className="d-block h-100 w-100 object-fit-cover" src={image} alt="Banner" />

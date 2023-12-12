@@ -24,9 +24,8 @@ export const Banner = () => {
                 pagination={{ clickable: true }}
             >
                 {banners.map(banner => (
-                    <SwiperSlide>
+                    <SwiperSlide key={banner.id}>
                         <BannerItem
-                            key={banner.id}
                             name={banner.name}
                             image={banner.image}
                         />

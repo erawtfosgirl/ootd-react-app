@@ -16,7 +16,7 @@ export const ProductItem = ({ name, image, regularPrice, discountedPrice, discou
                     <i className="fa-regular fa-heart regular-icon" />
                     <i className="fa-solid fa-heart hidden solid-icon" />
                 </button>
-                {discountPercentage>0 && <span className="discount-box">-{discountPercentage}%</span>}
+                {discountPercentage > 0 && <span className="discount-box">-{discountPercentage}%</span>}
                 <button
                     type="button"
                     className="col-xl-7 col-lg-7 col-md-7 col-7 addtocart"

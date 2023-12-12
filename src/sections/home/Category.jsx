@@ -25,7 +25,6 @@ export const Category = () => {
                     spaceBetween={10}
                     navigation
                     modules={[Navigation]}
-                    loop
                     breakpoints={{
                         640: {
                             slidesPerView: 2,
@@ -42,9 +41,8 @@ export const Category = () => {
                     }}
                 >
                     {categories.map(category => (
-                        <SwiperSlide>
+                        <SwiperSlide key={category.id}>
                             <CategoryItem
-                                key={category.id}
                                 name={category.name}
                                 image={category.image}
                             />

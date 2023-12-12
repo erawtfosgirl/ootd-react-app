@@ -24,7 +24,7 @@ export const productData = [
         "discount_percentage": 0
     },
     {
-        "id": 2,
+        "id": 3,
         "name": "Warm vibes hoodie",
         "image": product3,
         "regular_price": 80.00,
@@ -33,7 +33,7 @@ export const productData = [
         "discount_percentage": 10
     },
     {
-        "id": 2,
+        "id": 4,
         "name": "Flat ankle boots with faux shearling",
         "image": product4,
         "regular_price": 50.00,

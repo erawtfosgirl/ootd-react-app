@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ReactComponent as LogoSvg } from '../../assets/icons/logo.svg'
 import { ReactComponent as WishlistSvg } from '../../assets/icons/wishlist.svg'
 import { ReactComponent as CartSvg } from '../../assets/icons/cart.svg'
@@ -8,8 +8,29 @@ import { ReactComponent as SearchSvg } from '../../assets/icons/search.svg'
 import { ReactComponent as ResetSvg } from '../../assets/icons/reset.svg'
 
 export const Header = () => {
+
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        setIsSticky(true)
+      }
+      else {
+        setIsSticky(false)
+      }
+    }
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }, [])
+
+
+  const headerClassName = isSticky ? 'site-header sticky' : 'site-header';
+
   return (
-    <header className="site-header">
+    <header className={headerClassName}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 header-logo">

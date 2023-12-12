@@ -19,7 +19,7 @@ export const TopProducts = () => {
                 <div className="row g-3">
                     {products.map(product => (
                         <ProductItem
-                            id={product.id}
+                            key={product.id}
                             name={product.name}
                             image={product.image}
                             regularPrice={product.regular_price}
