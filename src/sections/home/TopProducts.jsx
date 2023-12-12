@@ -22,6 +22,9 @@ export const TopProducts = () => {
                             id={product.id}
                             name={product.name}
                             image={product.image}
+                            regularPrice={product.regular_price}
+                            discountedPrice={product.discounted_price}
+                            discountPercentage={product.discount_percentage}
                         />
                     ))}
                 </div>

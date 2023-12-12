@@ -1,6 +1,7 @@
 import React from 'react'
 
-export const ProductItem = ({name,image}) => {
+export const ProductItem = ({ name, image, regularPrice, discountedPrice, discountPercentage }) => {
+
     return (
         <div className="col-lg-3 col-md-4 col-6 product-item">
             <div className="product-image">
@@ -15,7 +16,7 @@ export const ProductItem = ({name,image}) => {
                     <i className="fa-regular fa-heart regular-icon" />
                     <i className="fa-solid fa-heart hidden solid-icon" />
                 </button>
-                <span className="discount-box">-20%</span>
+                {discountPercentage>0 && <span className="discount-box">-{discountPercentage}%</span>}
                 <button
                     type="button"
                     className="col-xl-7 col-lg-7 col-md-7 col-7 addtocart"
@@ -28,10 +29,16 @@ export const ProductItem = ({name,image}) => {
                     <a href="#">{name}</a>
                 </h5>
                 <div className="product-price d-flex align-items-center justify-content-center gap-2">
-                    <div className="price-regular">55 $</div>
-                    <div className="price-old">
-                        <del> 70 $</del>
-                    </div>
+                    {discountPercentage > 0 ? (
+                        <>
+                            <div className="price-regular">{discountedPrice} $</div>
+                            <div className="price-old">
+                                <del>{regularPrice} $</del>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="price-regular">{regularPrice} $</div>
+                    )}
                 </div>
             </div>
         </div>
