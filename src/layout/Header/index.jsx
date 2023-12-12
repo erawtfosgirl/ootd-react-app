@@ -7,14 +7,14 @@ import { ReactComponent as CartSvg } from '../../assets/icons/cart.svg'
 import { ReactComponent as UserSvg } from '../../assets/icons/user.svg'
 import { ReactComponent as MenuSvg } from '../../assets/icons/menu.svg'
 import { ReactComponent as SearchSvg } from '../../assets/icons/search.svg'
-import { ReactComponent as ResetSvg } from '../../assets/icons/reset.svg'
+import { MobileSidebar } from '../../components/MobileSidebar'
 
 export const Header = () => {
 
   const [isSticky, setIsSticky] = useState(false);
   const { pathname } = useLocation(); // Get current location from React Router
   const isHomePage = pathname === '/'; // Check if it's the home page
-
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +27,11 @@ export const Header = () => {
   }, [isHomePage])
 
 
-  const headerClassName = isSticky ? 'site-header sticky' : (isHomePage? 'site-header':'site-header sticky');
+  const headerClassName = isSticky ? 'site-header sticky' : (isHomePage ? 'site-header' : 'site-header sticky');
 
+  const openSidebar=()=>{
+    setIsOpen(true)
+  }
 
   return (
     <header className={headerClassName}>
@@ -80,34 +83,11 @@ export const Header = () => {
                 <UserSvg />
               </NavLink>
             </div>
-            <div className="hamburger">
+            <div className="hamburger" onClick={openSidebar}>
               <MenuSvg />
             </div>
           </div>
-          <div className="sidebar">
-            <div className="top">
-              <button className="exit">
-                <ResetSvg />
-              </button>
-            </div>
-            <ul className="menu-list">
-              <li>
-                <NavLink to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/shop">Shop</NavLink>
-              </li>
-              <li>
-                <NavLink to="/about">About</NavLink>
-              </li>
-              <li>
-                <NavLink to="/contact">Contact</NavLink>
-              </li>
-              <li>
-                <NavLink to="/faq">Faq</NavLink>
-              </li>
-            </ul>
-          </div>
+          <MobileSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
       </div>
     </header>
