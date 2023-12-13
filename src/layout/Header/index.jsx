@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 import { ReactComponent as LogoSvg } from '../../assets/icons/logo.svg'
@@ -8,13 +8,16 @@ import { ReactComponent as UserSvg } from '../../assets/icons/user.svg'
 import { ReactComponent as MenuSvg } from '../../assets/icons/menu.svg'
 import { ReactComponent as SearchSvg } from '../../assets/icons/search.svg'
 import { MobileSidebar } from '../../components/MobileSidebar'
+import { SearchContext } from '../../context/SearchContext'
 
 export const Header = () => {
 
   const [isSticky, setIsSticky] = useState(false);
   const { pathname } = useLocation(); // Get current location from React Router
   const isHomePage = pathname === '/'; // Check if it's the home page
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { openSearch } = useContext(SearchContext);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,8 +32,8 @@ export const Header = () => {
 
   const headerClassName = isSticky ? 'site-header sticky' : (isHomePage ? 'site-header' : 'site-header sticky');
 
-  const openSidebar=()=>{
-    setIsOpen(true)
+  const openMobileSidebar = () => {
+    setIsSidebarOpen(true)
   }
 
   return (
@@ -63,7 +66,7 @@ export const Header = () => {
           </nav>
           <div className="col-xl-5 col-lg-4 col-md-11 col-sm-11 col-11 header-actions">
             <div className="search col-xl-5 col-lg-5 col-md-5 col-6">
-              <button className="d-flex align-items-center gap-2">
+              <button className="d-flex align-items-center gap-2" onClick={openSearch}>
                 <SearchSvg />
                 Search
               </button>
@@ -83,11 +86,11 @@ export const Header = () => {
                 <UserSvg />
               </NavLink>
             </div>
-            <div className="hamburger" onClick={openSidebar}>
+            <div className="hamburger" onClick={openMobileSidebar}>
               <MenuSvg />
             </div>
           </div>
-          <MobileSidebar isOpen={isOpen} setIsOpen={setIsOpen} />
+          <MobileSidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
         </div>
       </div>
     </header>

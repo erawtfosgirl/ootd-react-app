@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom'
 import { ReactComponent as ResetSvg } from '../assets/icons/reset.svg'
 
 
-export const MobileSidebar = ({ isOpen, setIsOpen }) => {
+export const MobileSidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     return (
-        <div className={`sidebar ${isOpen ? 'active' : ''}`}>
+        <div className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
             <div className="top">
-                <button className="exit" onClick={()=>setIsOpen(false)}>
+                <button className="exit" onClick={()=>setIsSidebarOpen(false)}>
                     <ResetSvg />
                 </button>
             </div>
