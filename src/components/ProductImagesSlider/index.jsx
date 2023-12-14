@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
+import { Navigation, Thumbs, Scrollbar } from 'swiper/modules'
 import { useState } from 'react'
 
 
@@ -8,12 +8,11 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-import './style.css'
+import './swiper.css'
 
 
 export const ProductImagesSlider = ({ images }) => {
   const [activeThumb, setActiveThumb] = useState(null);
-  console.log(activeThumb);
   return (
     <>
       <Swiper
@@ -23,7 +22,7 @@ export const ProductImagesSlider = ({ images }) => {
         modules={[Navigation, Thumbs]}
         grabCursor={true}
         thumbs={activeThumb ? { swiper: activeThumb } : null}
-        className='product-images-slider col-lg-9 col-md-2 col-sm-12 col-12 order-2'
+        className='product-images-slider'
       >
         {
           images.map((item, index) => (
@@ -37,13 +36,14 @@ export const ProductImagesSlider = ({ images }) => {
         onSwiper={setActiveThumb}
         loop={true}
         spaceBetween={10}
-        modules={[Navigation, Thumbs]}
+        slidesPerView={4}
+        modules={[Thumbs]}
         watchSlidesProgress={true}
-        className='product-images-slider-thumbs col-lg-2 col-md-2 col-sm-12 col-12 order-1'
+        className='product-images-slider-thumbs'
       >
         {
           images.map((item, index) => (
-            <SwiperSlide key={index} className='d-flex flex-column '>
+            <SwiperSlide key={index}>
               <div className="product-images-slider-thumbs-wrapper">
                 <img src={item} alt="product images" />
               </div>

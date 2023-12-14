@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { productData } from '../../db/productData';
 import { ProductItem } from '../../components/ProductItem';
-
-
 import { ProductImagesSlider } from '../../components/ProductImagesSlider';
 
 export const ProductDetail = () => {
@@ -23,7 +21,7 @@ export const ProductDetail = () => {
       <section className="details-section">
         <div className="container">
           <div className="row">
-            <div className="col-lg-5 col-md-12 col-sm-12 col-12 d-flex">
+            <div className="col-lg-5 col-md-12 col-sm-12 col-12">
               <ProductImagesSlider images={images.slider_images} />
             </div>
             <div className="col-lg-7 col-md-12 col-sm-12 col-12 product-info-main">
