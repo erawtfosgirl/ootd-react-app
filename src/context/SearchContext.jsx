@@ -13,7 +13,7 @@ export const SearchProvider = ({ children }) => {
     };
 
     return (
-        <SearchContext.Provider value={{ isOpen, openSearch,closeSearch }}>
+        <SearchContext.Provider value={{ isOpen, openSearch, closeSearch }}>
             {children}
         </SearchContext.Provider>
     );

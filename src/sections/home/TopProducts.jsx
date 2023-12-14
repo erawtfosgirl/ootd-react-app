@@ -20,6 +20,7 @@ export const TopProducts = () => {
                     {products.map(product => (
                         <ProductItem
                             key={product.id}
+                            id={product.id}
                             name={product.name}
                             image={product.image}
                             regularPrice={product.regular_price}

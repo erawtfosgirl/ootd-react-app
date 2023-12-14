@@ -418,6 +418,9 @@ body {
     font-size: 18px;
     color: #949494;
 }
+.product-info-price .price-regular{
+    color: black;
+}
 .details-section .product-add-form .txt {
     font-weight: 500;
     font-size: 16px;

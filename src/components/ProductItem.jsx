@@ -1,17 +1,18 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-export const ProductItem = ({ name, image, regularPrice, discountedPrice, discountPercentage }) => {
+export const ProductItem = ({ id, name, image, regularPrice, discountedPrice, discountPercentage }) => {
 
     return (
         <div className="col-lg-3 col-md-4 col-6 product-item">
             <div className="product-image">
-                <a href="product.html">
+                <NavLink to={`/product/${id}`}>
                     <img
                         className="img-fluid"
                         src={image}
                         alt="Image"
                     />
-                </a>
+                </NavLink>
                 <button className="wishlist action-box">
                     <i className="fa-regular fa-heart regular-icon" />
                     <i className="fa-solid fa-heart hidden solid-icon" />
