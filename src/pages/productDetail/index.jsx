@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom'
 import { productData } from '../../db/productData';
 import { ProductItem } from '../../components/ProductItem';
 
+
+import { ProductImagesSlider } from '../../components/ProductImagesSlider';
+
 export const ProductDetail = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
@@ -11,47 +14,17 @@ export const ProductDetail = () => {
   }, [])
 
   const { id } = useParams();
-  console.log(typeof id);
   const productId = parseInt(id);
   const foundProduct = productData.find(item => item.id === productId);
-  const { name, discount_percentage, regular_price, discounted_price,description,material } = foundProduct;
+  const { name, discount_percentage, regular_price, discounted_price, description, material, images } = foundProduct;
 
   return (
     <>
       <section className="details-section">
         <div className="container">
           <div className="row">
-            <div className="col-lg-5 col-md-12 col-sm-12 col-12 product-main-images d-flex justify-content-between gap-2">
-              <div className="img-select col-lg-2 col-md-2">
-                <div className="img-item col-12">
-                  <a href="#" data-id={1}>
-                    <img src="assets/images/products/dress1_1.jpg" alt="Image" />
-                  </a>
-                </div>
-                <div className="img-item col-12">
-                  <a href="#" data-id={2}>
-                    <img src="assets/images/products/dress1_2.jpg" alt="Image" />
-                  </a>
-                </div>
-                <div className="img-item col-12">
-                  <a href="#" data-id={3}>
-                    <img src="assets/images/products/dress1_3.jpg" alt="Image" />
-                  </a>
-                </div>
-                <div className="img-item col-12">
-                  <a href="#" data-id={4}>
-                    <img src="assets/images/products/dress1_4.jpg" alt="Image" />
-                  </a>
-                </div>
-              </div>
-              <div className="img-display col-lg-10 col-md-10">
-                <div className="img-showcase col-lg-12">
-                  <img src="assets/images/products/dress1_1.jpg" alt="Image" />
-                  <img src="assets/images/products/dress1_2.jpg" alt="Image" />
-                  <img src="assets/images/products/dress1_3.jpg" alt="Image" />
-                  <img src="assets/images/products/dress1_4.jpg" alt="Image" />
-                </div>
-              </div>
+            <div className="col-lg-5 col-md-12 col-sm-12 col-12 d-flex">
+              <ProductImagesSlider images={images.slider_images} />
             </div>
             <div className="col-lg-7 col-md-12 col-sm-12 col-12 product-info-main">
               <div className="top">
@@ -161,7 +134,7 @@ export const ProductDetail = () => {
                 key={product.id}
                 id={product.id}
                 name={product.name}
-                image={product.image}
+                image={product.images.main_image}
                 regularPrice={product.regular_price}
                 discountedPrice={product.discounted_price}
                 discountPercentage={product.discount_percentage}
