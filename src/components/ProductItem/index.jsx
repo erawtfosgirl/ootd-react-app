@@ -2,10 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) => {
-    let discountedPrice;
-    if (discountPercentage > 0) {
-        discountedPrice = price - price * discountPercentage * 0.01;
-    }
+    const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
     return (
         <div className="col-lg-3 col-md-4 col-6 product-item">
             <div className="product-image">
@@ -35,13 +32,13 @@ export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) 
                 <div className="product-price d-flex align-items-center justify-content-center gap-2">
                     {discountedPrice ? (
                         <>
-                            <div className="price-regular">{discountedPrice} $</div>
+                            <div className="price-regular">{`${discountedPrice.toFixed(2)} $`}</div>
                             <div className="price-old">
-                                <del>{price} $</del>
+                                <del>{`${price.toFixed(2)} $`}</del>
                             </div>
                         </>
                     ) : (
-                        <div className="price-regular">{price} $</div>
+                        <div className="price-regular">{`${price.toFixed(2)} $`}</div>
                     )}
                 </div>
             </div>
