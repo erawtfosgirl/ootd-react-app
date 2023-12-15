@@ -42,7 +42,7 @@ export const ShopProduct = () => {
                         <ProductItem
                             key={product.id}
                             name={product.name}
-                            image={product.image}
+                            image={product.images.main_image}
                             regularPrice={product.regular_price}
                             discountedPrice={product.discounted_price}
                             discountPercentage={product.discount_percentage}

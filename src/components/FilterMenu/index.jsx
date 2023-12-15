@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactComponent as ResetSvg } from '../assets/icons/reset.svg'
+import { ReactComponent as ResetSvg } from '../../assets/icons/reset.svg'
 
 
 export const FilterMenu = ({isOpen,setIsOpen}) => {

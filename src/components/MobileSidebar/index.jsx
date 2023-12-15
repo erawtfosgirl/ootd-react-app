@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import { ReactComponent as ResetSvg } from '../assets/icons/reset.svg'
+import { ReactComponent as ResetSvg } from '../../assets/icons/reset.svg'
 
 
 export const MobileSidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {

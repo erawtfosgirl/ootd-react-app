@@ -42,11 +42,11 @@ a {
 
 .swiper-button-prev:after {
     font-size: 20px !important;
-    color: black !important;
+    color: white !important;
 }
 .swiper-button-next:after{
     font-size: 20px !important;
-    color: black !important;
+    color: white !important;
 }
 
 body {

@@ -1,8 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { SearchContext } from '../../context/SearchContext';
+import { SearchItem } from '../../components/SearchItem';
+import { productData } from '../../db/productData';
+import { SearchInput } from '../../components/SearchInput';
+import { NavLink } from 'react-router-dom';
 
 export const Search = () => {
     const { isOpen, closeSearch } = useContext(SearchContext);
+
+    const [filteredProducts, setFilteredProducts] = useState(productData);
+
+    const handleSearch = (term) => {
+        const filtered = productData.filter(product =>
+            product.name.toLowerCase().includes(term.toLowerCase())
+        );
+        setFilteredProducts(filtered);
+    };
     return (
         <div className={`search-area ${isOpen ? 'active-search-area' : ''}`}>
             <div className="container">
@@ -30,102 +43,23 @@ export const Search = () => {
                         />
                     </svg>
                 </div>
-                <div className="col-xl-6 col-lg-6 col-md-9 col-10 search-bar mt-5 d-flex align-items-center gap-3 m-auto">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={25}
-                        viewBox="0 0 24 25"
-                        fill="none"
-                    >
-                        <path
-                            d="M11.5 21.5C16.7467 21.5 21 17.2467 21 12C21 6.75329 16.7467 2.5 11.5 2.5C6.25329 2.5 2 6.75329 2 12C2 17.2467 6.25329 21.5 11.5 21.5Z"
-                            stroke="white"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M22 22.5L20 20.5"
-                            stroke="white"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
-                    <input type="search" placeholder="What are you looking for ?" />
-                </div>
+                <SearchInput onSearch={handleSearch} />
                 <div className="col-xl-6 col-lg-6 col-md-9 col-10 mt-5 search-products m-auto">
                     <div className="title d-flex justify-content-between align-items-center">
                         <h5>Products</h5>
-                        <a href="#shop">See all (17)</a>
+                        <NavLink to="/shop">See all (17)</NavLink>
                     </div>
-                    <div className="col-12 search-item d-flex align-items-center gap-3">
-                        <div className="col-2">
-                            <a href="#product">
-                                <img
-                                    className="img-fluid "
-                                    src="assets/images/products/bag1_1.jpg"
-                                    alt="Image"
-                                />
-                            </a>
-                        </div>
-                        <div className="product-details">
-                            <h5 className="product-name ">
-                                <a href="#product">Shoulder bag with flap</a>
-                            </h5>
-                            <div className="product-price d-flex align-items-center gap-2">
-                                <div className="price-regular">55 $</div>
-                                <div className="price-old">
-                                    <del> 70 $</del>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-12 search-item d-flex align-items-center gap-3">
-                        <div className="col-2">
-                            <a href="#product">
-                                <img
-                                    className="img-fluid "
-                                    src="assets/images/products/bag1_2.jpg"
-                                    alt="Image"
-                                />
-                            </a>
-                        </div>
-                        <div className="product-details">
-                            <h5 className="product-name ">
-                                <a href="#product">Shoulder bag with flap</a>
-                            </h5>
-                            <div className="product-price d-flex align-items-center gap-2">
-                                <div className="price-regular">55 $</div>
-                                <div className="price-old">
-                                    <del> 70 $</del>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-12 search-item d-flex align-items-center gap-3">
-                        <div className="col-2">
-                            <a href="#product">
-                                <img
-                                    className="img-fluid "
-                                    src="assets/images/products/bag1_1.jpg"
-                                    alt="Image"
-                                />
-                            </a>
-                        </div>
-                        <div className="product-details">
-                            <h5 className="product-name ">
-                                <a href="#product">Shoulder bag with flap</a>
-                            </h5>
-                            <div className="product-price d-flex align-items-center gap-2">
-                                <div className="price-regular">55 $</div>
-                                <div className="price-old">
-                                    <del> 70 $</del>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {filteredProducts.map(product => (
+                        <SearchItem
+                            key={product.id}
+                            id={product.id}
+                            image={product.images.main_image}
+                            name={product.name}
+                            discountPercentage={product.discount_percentage}
+                            discountedPrice={product.discounted_price}
+                            regularPrice={product.regular_price}
+                        />
+                    ))}
                 </div>
             </div>
         </div>

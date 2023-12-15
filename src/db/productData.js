@@ -26,7 +26,6 @@ export const productData = [
                 product1_2,
                 product1_3,
                 product1_4,
-                product1_3
             ]
         },
         "regular_price": 50.00,
