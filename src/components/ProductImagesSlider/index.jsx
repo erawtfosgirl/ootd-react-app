@@ -13,6 +13,7 @@ import './swiper.css'
 
 export const ProductImagesSlider = ({ images }) => {
   const [activeThumb, setActiveThumb] = useState(null);
+  
   return (
     <>
       <Swiper

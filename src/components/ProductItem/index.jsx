@@ -1,15 +1,18 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export const ProductItem = ({ id, name, image, regularPrice, discountedPrice, discountPercentage }) => {
-
+export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) => {
+    let discountedPrice;
+    if (discountPercentage > 0) {
+        discountedPrice = price - price * discountPercentage * 0.01;
+    }
     return (
         <div className="col-lg-3 col-md-4 col-6 product-item">
             <div className="product-image">
                 <NavLink to={`/product/${id}`}>
                     <img
                         className="img-fluid"
-                        src={image}
+                        src={thumbnail}
                         alt="Image"
                     />
                 </NavLink>
@@ -27,18 +30,18 @@ export const ProductItem = ({ id, name, image, regularPrice, discountedPrice, di
             </div>
             <div className="product-details mt-2">
                 <h5 className="product-name">
-                    <a href="#">{name}</a>
+                    <NavLink to={`/product/${id}`}>{name}</NavLink>
                 </h5>
                 <div className="product-price d-flex align-items-center justify-content-center gap-2">
-                    {discountPercentage > 0 ? (
+                    {discountedPrice ? (
                         <>
                             <div className="price-regular">{discountedPrice} $</div>
                             <div className="price-old">
-                                <del>{regularPrice} $</del>
+                                <del>{price} $</del>
                             </div>
                         </>
                     ) : (
-                        <div className="price-regular">{regularPrice} $</div>
+                        <div className="price-regular">{price} $</div>
                     )}
                 </div>
             </div>

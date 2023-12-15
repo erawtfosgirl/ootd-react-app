@@ -19,76 +19,68 @@ export const productData = [
     {
         "id": 1,
         "name": "Short halter neck dress with sequins and fringing",
-        "images": {
-            "main_image": product1_1,
-            "slider_images": [
-                product1_1,
-                product1_2,
-                product1_3,
-                product1_4,
-            ]
-        },
-        "regular_price": 50.00,
-        "discounted_price": 40.00,
-        "currency": "USD",
-        "discount_percentage": 0,
+        "price": 50.00,
+        "discountPercentage": 10,
+        "stock": 5,
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colors selection will easy to mix-n-match with your wardrobe.",
-        "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny"
+        "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
+        "category": "Dress",
+        "thumbnail": product1_1,
+        "images": [
+            product1_1,
+            product1_2,
+            product1_3,
+            product1_4,
+        ],
     },
     {
         "id": 2,
         "name": "Buckled crossbody bag",
-        "images": {
-            "main_image": product2_1,
-            "slider_images": [
-                product2_1,
-                product2_2,
-                product2_3
-            ]
-        },
-        "regular_price": 50.00,
-        "discounted_price": 0,
-        "currency": "USD",
-        "discount_percentage": 0,
+        "price": 59.00,
+        "discountPercentage": 0,
+        "stock": 10,
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colors selection will easy to mix-n-match with your wardrobe.",
-        "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny"
+        "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
+        "category": "Bag",
+        "thumbnail": product2_1,
+        "images": [
+            product2_1,
+            product2_2,
+            product2_3,
+        ],
     },
     {
         "id": 3,
         "name": "Warm vibes hoodie",
-        "images": {
-            "main_image": product3_1,
-            "slider_images": [
-                product3_1,
-                product3_2,
-                product3_3,
-                product3_4
-            ]
-        },
-        "regular_price": 80.00,
-        "discounted_price": 72.00,
-        "currency": "USD",
-        "discount_percentage": 10,
+        "price": 79.00,
+        "discountPercentage": 0,
+        "stock": 5,
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colors selection will easy to mix-n-match with your wardrobe.",
-        "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny"
+        "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
+        "category": "Hoodie",
+        "thumbnail": product3_1,
+        "images": [
+            product3_1,
+            product3_2,
+            product3_3,
+            product3_4,
+        ],
     },
     {
         "id": 4,
         "name": "Flat ankle boots with faux shearling",
-        "images": {
-            "main_image": product4_1,
-            "slider_images": [
-                product4_1,
-                product4_2,
-                product4_3,
-                product4_4
-            ]
-        },
-        "regular_price": 50.00,
-        "discounted_price": 0,
-        "currency": "USD",
-        "discount_percentage": 0,
+        "price": 139.00,
+        "discountPercentage": 0,
+        "stock": 5,
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colors selection will easy to mix-n-match with your wardrobe.",
-        "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny"
-    }
+        "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
+        "category": "Shoes",
+        "thumbnail": product4_1,
+        "images": [
+            product4_1,
+            product4_2,
+            product4_3,
+            product4_4,
+        ],
+    },
 ]

@@ -14,7 +14,12 @@ export const ProductDetail = () => {
   const { id } = useParams();
   const productId = parseInt(id);
   const foundProduct = productData.find(item => item.id === productId);
-  const { name, discount_percentage, regular_price, discounted_price, description, material, images } = foundProduct;
+  const { name, discountPercentage, price, description, material, images } = foundProduct;
+
+  let discountedPrice;
+  if (discountPercentage > 0) {
+    discountedPrice = price - price * discountPercentage * 0.01;
+  }
 
   return (
     <>
@@ -22,21 +27,21 @@ export const ProductDetail = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-5 col-md-12 col-sm-12 col-12">
-              <ProductImagesSlider images={images.slider_images} />
+              <ProductImagesSlider images={images} />
             </div>
             <div className="col-lg-7 col-md-12 col-sm-12 col-12 product-info-main">
               <div className="top">
                 <h2 className="product-name">{name}</h2>
                 <p className="product-info-price d-flex gap-2">
-                  {discount_percentage > 0 ? (
+                  {discountedPrice ? (
                     <>
-                      <div className="price-regular">{discounted_price} $</div>
+                      <div className="price-regular">{discountedPrice} $</div>
                       <div className="price-old">
-                        <del>{regular_price} $</del>
+                        <del>{price} $</del>
                       </div>
                     </>
                   ) : (
-                    <div className="price-regular">{regular_price} $</div>
+                    <div className="price-regular">{price} $</div>
                   )}
                 </p>
               </div>
@@ -132,10 +137,9 @@ export const ProductDetail = () => {
                 key={product.id}
                 id={product.id}
                 name={product.name}
-                image={product.images.main_image}
-                regularPrice={product.regular_price}
-                discountedPrice={product.discounted_price}
-                discountPercentage={product.discount_percentage}
+                thumbnail={product.thumbnail}
+                price={product.price}
+                discountPercentage={product.discountPercentage}
               />
             ))}
           </div>
