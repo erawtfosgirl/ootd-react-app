@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const SearchInput = ({onSearch}) => {
     const [searchTerm, setSearchTerm] = useState('');
+
 
     const handleSearch = (e) => {
         const term = e.target.value;

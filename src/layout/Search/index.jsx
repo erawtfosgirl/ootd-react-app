@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { SearchContext } from '../../context/SearchContext';
 import { SearchItem } from '../../components/SearchItem';
 import { productData } from '../../db/productData';
@@ -7,13 +7,17 @@ import { NavLink } from 'react-router-dom';
 
 export const Search = () => {
     const { isOpen, closeSearch } = useContext(SearchContext);
+    const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
-    const [filteredProducts, setFilteredProducts] = useState(productData);
+    useEffect(() => {
+        setProducts(productData)
+    }, []);
 
     const handleSearch = (term) => {
-        const filtered = productData.filter(product =>
+        const filtered = term.length > 0 ? products.filter(product =>
             product.name.toLowerCase().includes(term.toLowerCase())
-        );
+        ) : [];
         setFilteredProducts(filtered);
     };
     return (
@@ -44,22 +48,25 @@ export const Search = () => {
                     </svg>
                 </div>
                 <SearchInput onSearch={handleSearch} />
-                <div className="col-xl-6 col-lg-6 col-md-9 col-10 mt-5 search-products m-auto">
-                    <div className="title d-flex justify-content-between align-items-center">
-                        <h5>Products</h5>
-                        <NavLink to="/shop">See all (17)</NavLink>
+                {filteredProducts.length > 0 && (
+                    <div className="col-xl-6 col-lg-6 col-md-9 col-10 mt-5 search-products m-auto">
+                        <div className="title d-flex justify-content-between align-items-center">
+                            <h5>Products</h5>
+                            <NavLink to="/shop">See all ({filteredProducts.length})</NavLink>
+                        </div>
+                        {filteredProducts.map(product => (
+                            <SearchItem
+                                key={product.id}
+                                id={product.id}
+                                thumbnail={product.thumbnail}
+                                name={product.name}
+                                discountPercentage={product.discountPercentage}
+                                price={product.price}
+                            />
+                        ))}
                     </div>
-                    {filteredProducts.map(product => (
-                        <SearchItem
-                            key={product.id}
-                            id={product.id}
-                            thumbnail={product.thumbnail}
-                            name={product.name}
-                            discountPercentage={product.discountPercentage}
-                            price={product.price}
-                        />
-                    ))}
-                </div>
+                )}
+
             </div>
         </div>
 
