@@ -53,11 +53,10 @@ export const Search = () => {
                         <SearchItem
                             key={product.id}
                             id={product.id}
-                            image={product.images.main_image}
+                            thumbnail={product.thumbnail}
                             name={product.name}
-                            discountPercentage={product.discount_percentage}
-                            discountedPrice={product.discounted_price}
-                            regularPrice={product.regular_price}
+                            discountPercentage={product.discountPercentage}
+                            price={product.price}
                         />
                     ))}
                 </div>

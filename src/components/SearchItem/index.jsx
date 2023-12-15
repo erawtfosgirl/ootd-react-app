@@ -1,14 +1,15 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export const SearchItem = ({ id, image, name, discountPercentage, discountedPrice, regularPrice }) => {
+export const SearchItem = ({ id, thumbnail, name, discountPercentage, price }) => {
+    const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
     return (
         <div className="col-12 search-item d-flex align-items-center gap-3">
             <div className="col-2">
                 <NavLink to={`/product/${id}`}>
                     <img
                         className="img-fluid "
-                        src={image}
+                        src={thumbnail}
                         alt="Image"
                     />
                 </NavLink>
@@ -18,15 +19,15 @@ export const SearchItem = ({ id, image, name, discountPercentage, discountedPric
                     <a href="#product">{name}</a>
                 </h5>
                 <div className="product-price d-flex align-items-center gap-2">
-                    {discountPercentage > 0 ? (
+                    {discountedPrice ? (
                         <>
-                            <div className="price-regular">{discountedPrice} $</div>
+                            <div className="price-regular">{`${discountedPrice.toFixed(2)} $`}</div>
                             <div className="price-old">
-                                <del>{regularPrice} $</del>
+                                <del>{`${price.toFixed(2)} $`}</del>
                             </div>
                         </>
                     ) : (
-                        <div className="price-regular">{regularPrice} $</div>
+                        <div className="price-regular">{`${price.toFixed(2)} $`}</div>
                     )}
                 </div>
             </div>

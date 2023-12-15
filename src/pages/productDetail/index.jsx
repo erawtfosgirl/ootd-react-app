@@ -16,10 +16,7 @@ export const ProductDetail = () => {
   const foundProduct = productData.find(item => item.id === productId);
   const { name, discountPercentage, price, description, material, images } = foundProduct;
 
-  let discountedPrice;
-  if (discountPercentage > 0) {
-    discountedPrice = price - price * discountPercentage * 0.01;
-  }
+  const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
 
   return (
     <>
@@ -35,13 +32,13 @@ export const ProductDetail = () => {
                 <p className="product-info-price d-flex gap-2">
                   {discountedPrice ? (
                     <>
-                      <div className="price-regular">{discountedPrice} $</div>
+                      <div className="price-regular">{`${discountedPrice.toFixed(2)} $`}</div>
                       <div className="price-old">
-                        <del>{price} $</del>
+                        <del>{`${price.toFixed(2)} $`}</del>
                       </div>
                     </>
                   ) : (
-                    <div className="price-regular">{price} $</div>
+                    <div className="price-regular">{`${price.toFixed(2)} $`}</div>
                   )}
                 </p>
               </div>
