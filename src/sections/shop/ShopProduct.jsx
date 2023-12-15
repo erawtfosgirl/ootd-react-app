@@ -41,6 +41,7 @@ export const ShopProduct = () => {
                     {products.map(product => (
                         <ProductItem
                             key={product.id}
+                            id={product.id}
                             name={product.name}
                             image={product.images.main_image}
                             regularPrice={product.regular_price}
