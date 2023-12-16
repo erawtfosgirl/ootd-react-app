@@ -39,7 +39,7 @@ export const CartItem = ({ id, thumbnail, name, quantity, price }) => {
                 </div>
                 <div className="bottom d-flex justify-content-between align-items-center">
                     <div className="product-quantity col-lg-2 col-md-2 col-sm-3 col-5">
-                        <button className="decrease" onClick={() => dispatch(decrementQuantity(id))}>
+                        <button className="decrease" disabled={quantity > 1 ? false : true} onClick={() => dispatch(decrementQuantity(id))}>
                             <i className="fa-solid fa-minus" />
                         </button>
                         <input type="text" value={quantity} />
