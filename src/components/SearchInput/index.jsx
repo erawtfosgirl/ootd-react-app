@@ -1,8 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
-export const SearchInput = ({onSearch}) => {
+export const SearchInput = ({onSearch,isFocused}) => {
     const [searchTerm, setSearchTerm] = useState('');
+    const inputRef = useRef(null);
 
+    useEffect(() => {
+        if (isFocused) {
+            inputRef.current.focus();
+        }
+    });
 
     const handleSearch = (e) => {
         const term = e.target.value;
@@ -38,6 +44,7 @@ export const SearchInput = ({onSearch}) => {
                 placeholder="What are you looking for ?"
                 value={searchTerm}
                 onChange={handleSearch}
+                ref={inputRef}
             />
         </div>
     )

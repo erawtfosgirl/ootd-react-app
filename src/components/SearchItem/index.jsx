@@ -16,7 +16,7 @@ export const SearchItem = ({ id, thumbnail, name, discountPercentage, price }) =
             </div>
             <div className="product-details">
                 <h5 className="product-name ">
-                    <a href="#product">{name}</a>
+                    <NavLink to={`/product/${id}`}>{name}</NavLink>
                 </h5>
                 <div className="product-price d-flex align-items-center gap-2">
                     {discountedPrice ? (

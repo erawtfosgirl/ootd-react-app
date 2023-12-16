@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 import { ReactComponent as LogoSvg } from '../../assets/icons/logo.svg'
@@ -7,21 +7,36 @@ import { ReactComponent as CartSvg } from '../../assets/icons/cart.svg'
 import { ReactComponent as UserSvg } from '../../assets/icons/user.svg'
 import { ReactComponent as MenuSvg } from '../../assets/icons/menu.svg'
 import { ReactComponent as SearchSvg } from '../../assets/icons/search.svg'
+
 import { MobileSidebar } from '../../components/MobileSidebar'
-import { SearchContext } from '../../context/SearchContext'
+import { Search } from '../../components/Search'
+
 
 export const Header = () => {
+  const [isStickyHeader, setIsStickyHeader] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isSearchAreaOpen, setIsSearchAreaOpen] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false); // State to manage input focus
 
-  const [isSticky, setIsSticky] = useState(false);
   const { pathname } = useLocation(); // Get current location from React Router
   const isHomePage = pathname === '/'; // Check if it's the home page
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { openSearch } = useContext(SearchContext);
 
+  const openSearch = () => {
+    setIsSearchAreaOpen(true)
+    setTimeout(() => {
+      setIsInputFocused(true)
+    }, 200);
+
+  };
+
+  const closeSearch = () => {
+    setIsSearchAreaOpen(false)
+    setIsInputFocused(false)
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(isHomePage && window.scrollY > 250)
+      setIsStickyHeader(isHomePage && window.scrollY > 250)
     }
     window.addEventListener('scroll', handleScroll);
     return () => {
@@ -30,11 +45,7 @@ export const Header = () => {
   }, [isHomePage])
 
 
-  const headerClassName = isSticky ? 'site-header sticky' : (isHomePage ? 'site-header' : 'site-header sticky');
-
-  const openMobileSidebar = () => {
-    setIsSidebarOpen(true)
-  }
+  const headerClassName = isStickyHeader ? 'site-header sticky' : (isHomePage ? 'site-header' : 'site-header sticky');
 
   return (
     <header className={headerClassName}>
@@ -66,10 +77,14 @@ export const Header = () => {
           </nav>
           <div className="col-xl-5 col-lg-4 col-md-11 col-sm-11 col-11 header-actions">
             <div className="search col-xl-5 col-lg-5 col-md-5 col-6">
-              <button className="d-flex align-items-center gap-2" onClick={openSearch}>
+              <button className="d-flex align-items-center gap-2 search-btn" onClick={openSearch}>
                 <SearchSvg />
                 Search
               </button>
+              <Search
+                isSearchAreaOpen={isSearchAreaOpen}
+                closeSearch={closeSearch}
+                isInputFocused={isInputFocused} />
             </div>
             <div className="wishlist">
               <NavLink to="/wishlist">
@@ -86,11 +101,14 @@ export const Header = () => {
                 <UserSvg />
               </NavLink>
             </div>
-            <div className="hamburger" onClick={openMobileSidebar}>
+            <div className="hamburger" onClick={() => setIsMobileSidebarOpen(true)}>
               <MenuSvg />
             </div>
           </div>
-          <MobileSidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+          <MobileSidebar
+            isMobileSidebarOpen={isMobileSidebarOpen}
+            setIsMobileSidebarOpen={setIsMobileSidebarOpen}
+          />
         </div>
       </div>
     </header>

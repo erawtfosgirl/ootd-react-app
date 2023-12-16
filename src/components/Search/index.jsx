@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { SearchContext } from '../../context/SearchContext';
+import React, { useEffect, useState } from 'react'
 import { SearchItem } from '../../components/SearchItem';
 import { productData } from '../../db/productData';
 import { SearchInput } from '../../components/SearchInput';
 import { NavLink } from 'react-router-dom';
 
-export const Search = () => {
-    const { isOpen, closeSearch } = useContext(SearchContext);
+export const Search = ({ isSearchAreaOpen, closeSearch, isInputFocused }) => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -21,33 +19,35 @@ export const Search = () => {
         setFilteredProducts(filtered);
     };
     return (
-        <div className={`search-area ${isOpen ? 'active-search-area' : ''}`}>
+        <div className={`search-area ${isSearchAreaOpen ? 'active-search-area' : ''}`}>
             <div className="container">
-                <div className="exit-search text-end" onClick={closeSearch}>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={30}
-                        height={30}
-                        viewBox="0 0 32 32"
-                        fill="none"
-                    >
-                        <path
-                            d="M6.66797 6.66699L25.3334 25.3324"
-                            stroke="#101010"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                        <path
-                            d="M6.66711 25.3324L25.3325 6.66699"
-                            stroke="#101010"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                        />
-                    </svg>
+                <div className='text-end'>
+                    <button className="exit-search-btn" onClick={closeSearch}>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width={30}
+                            height={30}
+                            viewBox="0 0 32 32"
+                            fill="none"
+                        >
+                            <path
+                                d="M6.66797 6.66699L25.3334 25.3324"
+                                stroke="#101010"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                            <path
+                                d="M6.66711 25.3324L25.3325 6.66699"
+                                stroke="#101010"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                    </button>
                 </div>
-                <SearchInput onSearch={handleSearch} />
+                <SearchInput onSearch={handleSearch} isFocused={isInputFocused} />
                 {filteredProducts.length > 0 && (
                     <div className="col-xl-6 col-lg-6 col-md-9 col-10 mt-5 search-products m-auto">
                         <div className="title d-flex justify-content-between align-items-center">
