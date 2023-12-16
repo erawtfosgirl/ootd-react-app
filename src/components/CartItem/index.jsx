@@ -42,7 +42,7 @@ export const CartItem = ({ id, thumbnail, name, quantity, price }) => {
                         <button className="decrease" onClick={() => dispatch(decrementQuantity(id))}>
                             <i className="fa-solid fa-minus" />
                         </button>
-                        <input type="text" defaultValue={quantity} />
+                        <input type="text" value={quantity} />
                         <button className="increase" onClick={() => dispatch(incrementQuantity(id))}>
                             <i className="fa-solid fa-plus" />
                         </button>
