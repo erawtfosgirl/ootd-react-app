@@ -5,7 +5,7 @@ import { CartItem } from '../../components/CartItem';
 
 export const CartProduct = () => {
     const basket = useSelector(state => state.basket);
-    
+
     const calculateSubtotal = () => {
         let subtotal = 0;
 
@@ -28,6 +28,7 @@ export const CartProduct = () => {
                         {basket.map(product => (
                             <CartItem
                                 key={product.id}
+                                id={product.id}
                                 thumbnail={product.thumbnail}
                                 name={product.name}
                                 quantity={product.quantity}

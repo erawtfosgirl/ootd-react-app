@@ -12,9 +12,13 @@ export const basketSlice = createSlice({
             else {
                 state.push({ ...action.payload, quantity: 1 });
             }
-        }
+        },
+        deleteFromBasket: (state, action) => {
+            const productId = action.payload;
+            return state.filter((product) => product.id !== productId);
+        },
     }
 })
 
-export const { addToBasket } = basketSlice.actions;
+export const { addToBasket, deleteFromBasket } = basketSlice.actions;
 export default basketSlice.reducer;

@@ -340,6 +340,10 @@ body {
 .cart-products-section .cart-item .top span {
     font-weight: 600;
 }
+.cart-products-section .cart-item .top h5 a{
+    font-size: 18px;
+    color: black;
+}
 .cart-products-section .cart-item .middle span {
     font-size: 14px;
 }
@@ -635,7 +639,7 @@ body {
     .search-section .search-item .product-details .product-price {
         font-size: 14px;
     }
-    .cart-products-section .cart-item .top h5 {
+    .cart-products-section .cart-item .top h5 a{
         font-size: 16px;
     }
     .review-section .main-item .top h4 {
