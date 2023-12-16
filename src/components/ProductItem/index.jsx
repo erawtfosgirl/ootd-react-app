@@ -6,7 +6,6 @@ import { addToBasket } from '../../redux/reducers/basketSlice';
 export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) => {
     const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
     const dispatch = useDispatch();
-    const basket = useSelector(state => state.basket);
 
     const handleAddToCart = () => {
         const newItem = {
@@ -46,7 +45,6 @@ export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) 
                 <h5 className="product-name">
                     <NavLink to={`/product/${id}`}>{name}</NavLink>
                 </h5>
-                {JSON.stringify(basket)}
                 <div className="product-price d-flex align-items-center justify-content-center gap-2">
                     {discountedPrice ? (
                         <>
