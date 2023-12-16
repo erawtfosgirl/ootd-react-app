@@ -21,8 +21,12 @@ export const basketSlice = createSlice({
             const findProd = state.find(product => product.id === action.payload)
             findProd.quantity++
         },
+        decrementQuantity: (state, action) => {
+            const findProd = state.find((product) => product.id == action.payload)
+            findProd.quantity--
+        }
     }
 })
 
-export const { addToBasket, deleteFromBasket, incrementQuantity } = basketSlice.actions;
+export const { addToBasket, deleteFromBasket, incrementQuantity, decrementQuantity } = basketSlice.actions;
 export default basketSlice.reducer;
