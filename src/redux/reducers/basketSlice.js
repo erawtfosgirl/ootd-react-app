@@ -5,7 +5,7 @@ export const basketSlice = createSlice({
     initialState: [],
     reducers: {
         addToBasket: (state, action) => {
-            const isExist = state.find(product => product.id == action.payload.id);
+            const isExist = state.find(product => product.id === action.payload.id);
             if (isExist) {
                 isExist.quantity++;
             }
@@ -15,10 +15,14 @@ export const basketSlice = createSlice({
         },
         deleteFromBasket: (state, action) => {
             const productId = action.payload;
-            return state.filter((product) => product.id !== productId);
+            return state.filter(product => product.id !== productId);
+        },
+        incrementQuantity: (state, action) => {
+            const findProd = state.find(product => product.id === action.payload)
+            findProd.quantity++
         },
     }
 })
 
-export const { addToBasket, deleteFromBasket } = basketSlice.actions;
+export const { addToBasket, deleteFromBasket, incrementQuantity } = basketSlice.actions;
 export default basketSlice.reducer;

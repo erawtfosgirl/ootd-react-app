@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { deleteFromBasket } from '../../redux/reducers/basketSlice';
+import { deleteFromBasket, incrementQuantity } from '../../redux/reducers/basketSlice';
 
 export const CartItem = ({ id, thumbnail, name, quantity, price }) => {
     const dispatch = useDispatch();
@@ -43,7 +43,7 @@ export const CartItem = ({ id, thumbnail, name, quantity, price }) => {
                             <i className="fa-solid fa-minus" />
                         </button>
                         <input type="text" defaultValue={quantity} />
-                        <button className="increase">
+                        <button className="increase" onClick={()=>dispatch(incrementQuantity(id))}>
                             <i className="fa-solid fa-plus" />
                         </button>
                     </div>
