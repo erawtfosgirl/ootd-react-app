@@ -1,20 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom';
 
-export const SearchInput = ({onSearch,isFocused}) => {
+export const SearchInput = ({ onSearch, isFocused }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const inputRef = useRef(null);
+    const location = useLocation();
 
     useEffect(() => {
         if (isFocused) {
             inputRef.current.focus();
         }
-    });
+    }, [isFocused]);
 
     const handleSearch = (e) => {
         const term = e.target.value;
         setSearchTerm(term);
-        onSearch(term)
+        onSearch(term);
     }
+
+    useEffect(() => {
+        setSearchTerm('')
+    }, [location])
+
     return (
         <div className="col-xl-6 col-lg-6 col-md-9 col-10 search-bar mt-5 d-flex align-items-center gap-3 m-auto">
             <svg

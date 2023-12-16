@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { SearchItem } from '../../components/SearchItem';
 import { productData } from '../../db/productData';
 import { SearchInput } from '../../components/SearchInput';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export const Search = ({ isSearchAreaOpen, closeSearch, isInputFocused }) => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const location = useLocation();
 
 
     useEffect(() => {
@@ -19,6 +20,11 @@ export const Search = ({ isSearchAreaOpen, closeSearch, isInputFocused }) => {
         ) : [];
         setFilteredProducts(filtered);
     };
+
+    useEffect(() => {
+        setFilteredProducts([])
+    }, [location])
+
     return (
         <div className={`search-area ${isSearchAreaOpen ? 'active-search-area' : ''}`}>
             <div className="container">

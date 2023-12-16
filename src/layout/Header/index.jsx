@@ -26,7 +26,6 @@ export const Header = () => {
     setTimeout(() => {
       setIsInputFocused(true)
     }, 200);
-
   };
 
   const closeSearch = () => {
