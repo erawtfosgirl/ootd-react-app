@@ -84,7 +84,8 @@ export const Header = () => {
               <Search
                 isSearchAreaOpen={isSearchAreaOpen}
                 closeSearch={closeSearch}
-                isInputFocused={isInputFocused} />
+                isInputFocused={isInputFocused}
+              />
             </div>
             <div className="wishlist">
               <NavLink to="/wishlist">

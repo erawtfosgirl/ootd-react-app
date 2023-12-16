@@ -8,6 +8,7 @@ export const Search = ({ isSearchAreaOpen, closeSearch, isInputFocused }) => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
+
     useEffect(() => {
         setProducts(productData)
     }, []);
@@ -62,6 +63,7 @@ export const Search = ({ isSearchAreaOpen, closeSearch, isInputFocused }) => {
                                 name={product.name}
                                 discountPercentage={product.discountPercentage}
                                 price={product.price}
+                                closeSearch={closeSearch}
                             />
                         ))}
                     </div>
