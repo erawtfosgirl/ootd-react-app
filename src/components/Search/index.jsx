@@ -11,7 +11,7 @@ export const Search = ({ isSearchAreaOpen, closeSearch, isInputFocused }) => {
 
 
     useEffect(() => {
-        setProducts(productData)
+        setProducts(productData);
     }, []);
 
     const handleSearch = (term) => {
@@ -22,7 +22,7 @@ export const Search = ({ isSearchAreaOpen, closeSearch, isInputFocused }) => {
     };
 
     useEffect(() => {
-        setFilteredProducts([])
+        setFilteredProducts([]);
     }, [location])
 
     return (

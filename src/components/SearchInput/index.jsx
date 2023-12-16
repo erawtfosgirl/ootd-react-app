@@ -19,7 +19,7 @@ export const SearchInput = ({ onSearch, isFocused }) => {
     }
 
     useEffect(() => {
-        setSearchTerm('')
+        setSearchTerm('');
     }, [location])
 
     return (
