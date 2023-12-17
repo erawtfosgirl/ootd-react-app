@@ -1,12 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import { addToBasket } from '../../redux/reducers/basketSlice';
-import { addToWishlist, deleteFromWishlist } from '../../redux/reducers/wishlistSlice';
+import { WishlistButton } from '../WishlistButton';
 
 export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) => {
     const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
     const dispatch = useDispatch();
-    const wishlist = useSelector(state => state.wishlist);
 
     const newItem = {
         id,
@@ -20,18 +19,7 @@ export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) 
         dispatch(addToBasket(newItem));
         console.log("Product added to basket");
     }
-    // Check if the product is in the wishlist
-    const isInWishlist = wishlist.find(product => product.id === id);
 
-    const handleWishlistAction = () => {
-        if (isInWishlist) {
-            dispatch(deleteFromWishlist(id));
-            console.log("Product removed from wishlist");
-        } else {
-            dispatch(addToWishlist(newItem));
-            console.log("Product added to wishlist");
-        }
-    }
     return (
         <div className="col-lg-3 col-md-4 col-6 product-item">
             <div className="product-image">
@@ -42,15 +30,7 @@ export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) 
                         alt="Image"
                     />
                 </NavLink>
-
-                <button type='button' className="wishlist action-box" onClick={handleWishlistAction}>
-                    {isInWishlist ?
-                        (
-                            <i className="fa-solid fa-heart solid-icon" />
-                        ) : (
-                            <i className="fa-regular fa-heart regular-icon" />
-                        )}
-                </button>
+                <WishlistButton id={id} newItem={newItem} />
                 {discountPercentage > 0 && <span className="discount-box">-{discountPercentage}%</span>}
                 <button
                     type="button"
