@@ -376,7 +376,7 @@ body {
     font-size: 18px;
     letter-spacing: 1px;
 }
-.cart-products-section .empty-box {
+.empty-box {
     height: 50vh;
     background-color: white;
     display: flex;
@@ -384,11 +384,11 @@ body {
     justify-content: center;
     align-items: center;
 }
-.cart-products-section .empty-box p {
+.empty-box p {
     font-weight: 500;
     font-size: 25px;
 }
-.cart-products-section .empty-box a {
+.empty-box a {
     color: white;
     font-size: 18px;
     font-weight: 400;
