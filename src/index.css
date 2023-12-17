@@ -763,6 +763,9 @@ body {
 .product-item .product-image .action-box .solid-icon {
     color: #d64b59;
 }
+.cart-item .action-box .solid-icon{
+    color: #d64b59;
+}
 .product-item .product-image .action-box .hidden {
     display: none;
 }

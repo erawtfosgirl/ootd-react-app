@@ -37,6 +37,7 @@ export const CartProduct = () => {
                                         name={product.name}
                                         quantity={product.quantity}
                                         price={product.price}
+                                        discountPercentage={product.discountPercentage}
                                     />
                                 ))}
                             </div>

@@ -2,9 +2,17 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { decrementQuantity, deleteFromBasket, incrementQuantity } from '../../redux/reducers/basketSlice';
+import { WishlistButton } from '../WishlistButton';
 
-export const CartItem = ({ id, thumbnail, name, quantity, price }) => {
+export const CartItem = ({ id, thumbnail, name, quantity, price, discountPercentage }) => {
     const dispatch = useDispatch();
+    const newItem = {
+        id,
+        name,
+        thumbnail,
+        price,
+        discountPercentage,
+    }
     return (
         <div className="cart-item col-lg-12 col-md-12 col-sm-12 col-12 d-flex align-items-center">
             <div className="cart-image col-lg-2 col-md-2 col-sm-3 col-4">
@@ -48,9 +56,7 @@ export const CartItem = ({ id, thumbnail, name, quantity, price }) => {
                         </button>
                     </div>
                     <div className="product-action d-flex align-items-center gap-3">
-                        <button className="addtowishlist">
-                            <i className="fa-regular fa-heart" />
-                        </button>
+                        <WishlistButton id={id} newItem={newItem} />
                         <button type='button' className="removefromlist" onClick={() => dispatch(deleteFromBasket(id))}>
                             <i className="fa-solid fa-trash" />
                         </button>
