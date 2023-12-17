@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { productData } from '../../db/productData';
 import { ProductItem } from '../../components/ProductItem';
 import { ProductImagesSlider } from '../../components/ProductImagesSlider';
+import { useDispatch } from 'react-redux';
+import { addToBasket } from '../../redux/reducers/basketSlice';
 
 export const ProductDetail = () => {
-  const [relatedProducts, setRelatedProducts] = useState([]);
-
-  useEffect(() => {
-    setRelatedProducts(productData);
-  }, [])
+  const [productQuantity, setProductQuantity] = useState(1);
 
   const { id } = useParams();
   const productId = parseInt(id);
@@ -17,6 +15,15 @@ export const ProductDetail = () => {
   const { name, discountPercentage, price, description, material, images } = foundProduct;
 
   const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
+
+  const dispatch = useDispatch();
+
+  const decreaseQuantity = () => {
+    setProductQuantity(productQuantity - 1);
+  }
+  const increaseQuantity = () => {
+    setProductQuantity(productQuantity + 1);
+  }
 
   return (
     <>
@@ -94,15 +101,15 @@ export const ProductDetail = () => {
                   </div>
                   <div className="product-options d-flex align-items-center gap-3">
                     <div className="product-quantity col-lg-2 col-md-2 col-sm-3 col-3">
-                      <button className="decrease">
+                      <button type='button' className="decrease" onClick={decreaseQuantity} disabled={productQuantity > 1 ? false : true}>
                         <i className="fa-solid fa-minus" />
                       </button>
-                      <input type="text" defaultValue={1} className="col-6" />
-                      <button className="increase">
+                      <input type="text" value={productQuantity} className="col-6" />
+                      <button type='button' className="increase" onClick={increaseQuantity}>
                         <i className="fa-solid fa-plus" />
                       </button>
                     </div>
-                    <button type="button" className=" addtocart">
+                    <button type="button" className=" addtocart" onClick={() => dispatch(addToBasket({...foundProduct,quantity:productQuantity}))}>
                       Add to cart
                     </button>
                     <button className="wishlist action-box">
@@ -129,7 +136,7 @@ export const ProductDetail = () => {
       <section className="related-products my-5">
         <div className="container">
           <div className="row g-3">
-            {relatedProducts.map(product => (
+            {productData.map(product => (
               <ProductItem
                 key={product.id}
                 id={product.id}

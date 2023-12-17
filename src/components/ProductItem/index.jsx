@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { addToBasket } from '../../redux/reducers/basketSlice';
 
 export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) => {
-    const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : price;
+    const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
     const dispatch = useDispatch();
 
     const handleAddToCart = () => {
@@ -12,7 +12,8 @@ export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) 
             id,
             name,
             thumbnail,
-            price:discountedPrice,
+            price,
+            discountPercentage,
             quantity: 0 // default quantity for a new item
         }
         dispatch(addToBasket(newItem));
@@ -46,7 +47,7 @@ export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) 
                     <NavLink to={`/product/${id}`}>{name}</NavLink>
                 </h5>
                 <div className="product-price d-flex align-items-center justify-content-center gap-2">
-                    {discountPercentage ? (
+                    {discountedPrice ? (
                         <>
                             <div className="price-regular">{`${discountedPrice.toFixed(2)} $`}</div>
                             <div className="price-old">

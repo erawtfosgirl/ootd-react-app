@@ -5,13 +5,18 @@ export const basketSlice = createSlice({
     initialState: [],
     reducers: {
         addToBasket: (state, action) => {
-            const isExist = state.find(product => product.id === action.payload.id);
-            if (isExist) {
-                isExist.quantity++;
+            const { id, price, discountPercentage, quantity = 1 } = action.payload;
+            const existingProduct = state.find(product => product.id === id);
+
+            if (existingProduct) {
+                existingProduct.quantity += quantity || 1;
+            } else {
+                const productPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : price;
+                state.push({ ...action.payload, price: productPrice, quantity: quantity || 1 });
             }
-            else {
-                state.push({ ...action.payload, quantity: 1 });
-            }
+            //quantity || 1 checks whether quantity exists and is truthy.
+            // If quantity exists and has a value (other than 0 or false), it will use that value.
+            // If quantity is null, undefined, 0, false, or any falsy value, it will default to 1.
         },
         deleteFromBasket: (state, action) => {
             const productId = action.payload;

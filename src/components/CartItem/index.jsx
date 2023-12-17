@@ -39,11 +39,11 @@ export const CartItem = ({ id, thumbnail, name, quantity, price }) => {
                 </div>
                 <div className="bottom d-flex justify-content-between align-items-center">
                     <div className="product-quantity col-lg-2 col-md-2 col-sm-3 col-5">
-                        <button className="decrease" disabled={quantity > 1 ? false : true} onClick={() => dispatch(decrementQuantity(id))}>
+                        <button type='button' className="decrease" disabled={quantity > 1 ? false : true} onClick={() => dispatch(decrementQuantity(id))}>
                             <i className="fa-solid fa-minus" />
                         </button>
                         <input type="text" value={quantity} />
-                        <button className="increase" onClick={() => dispatch(incrementQuantity(id))}>
+                        <button type='button' className="increase" onClick={() => dispatch(incrementQuantity(id))}>
                             <i className="fa-solid fa-plus" />
                         </button>
                     </div>
@@ -51,7 +51,7 @@ export const CartItem = ({ id, thumbnail, name, quantity, price }) => {
                         <button className="addtowishlist">
                             <i className="fa-regular fa-heart" />
                         </button>
-                        <button className="removefromlist" onClick={() => dispatch(deleteFromBasket(id))}>
+                        <button type='button' className="removefromlist" onClick={() => dispatch(deleteFromBasket(id))}>
                             <i className="fa-solid fa-trash" />
                         </button>
                     </div>
