@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist, deleteFromWishlist } from '../../redux/reducers/wishlistSlice';
 
 export const WishlistButton = ({ id, newItem }) => {
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
     const wishlist = useSelector(state => state.wishlist);
 
     // Check if the product is in the wishlist

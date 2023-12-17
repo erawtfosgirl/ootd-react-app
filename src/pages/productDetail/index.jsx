@@ -5,6 +5,7 @@ import { ProductItem } from '../../components/ProductItem';
 import { ProductImagesSlider } from '../../components/ProductImagesSlider';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../../redux/reducers/basketSlice';
+import { WishlistButton } from '../../components/WishlistButton';
 
 export const ProductDetail = () => {
   const [productQuantity, setProductQuantity] = useState(1);
@@ -109,13 +110,10 @@ export const ProductDetail = () => {
                         <i className="fa-solid fa-plus" />
                       </button>
                     </div>
-                    <button type="button" className=" addtocart" onClick={() => dispatch(addToBasket({...foundProduct,quantity:productQuantity}))}>
+                    <button type="button" className=" addtocart" onClick={() => dispatch(addToBasket({ ...foundProduct, quantity: productQuantity }))}>
                       Add to cart
                     </button>
-                    <button className="wishlist action-box">
-                      <i className="fa-regular fa-heart regular-icon" />
-                      <i className="fa-solid fa-heart hidden solid-icon" />
-                    </button>
+                    <WishlistButton id={foundProduct.id} newItem={foundProduct} />
                   </div>
                 </form>
               </div>
