@@ -23,15 +23,18 @@ export const basketSlice = createSlice({
             return state.filter(product => product.id !== productId);
         },
         incrementQuantity: (state, action) => {
-            const findProd = state.find(product => product.id === action.payload)
-            findProd.quantity++
+            const findProd = state.find(product => product.id === action.payload);
+            findProd.quantity++;
         },
         decrementQuantity: (state, action) => {
-            const findProd = state.find((product) => product.id == action.payload)
-            findProd.quantity--
+            const findProd = state.find((product) => product.id == action.payload);
+            findProd.quantity--;
+        },
+        clearBasket: (state, action) => {
+            return [];
         }
     }
 })
 
-export const { addToBasket, deleteFromBasket, incrementQuantity, decrementQuantity } = basketSlice.actions;
+export const { addToBasket, deleteFromBasket, incrementQuantity, decrementQuantity, clearBasket } = basketSlice.actions;
 export default basketSlice.reducer;

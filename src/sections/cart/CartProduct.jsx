@@ -1,10 +1,11 @@
-import React from 'react'
-
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CartItem } from '../../components/CartItem';
+import { clearBasket } from '../../redux/reducers/basketSlice';
 
 export const CartProduct = () => {
+    const dispatch = useDispatch();
     const basket = useSelector(state => state.basket);
+
 
     const calculateSubtotal = () => {
         let subtotal = 0;
@@ -21,7 +22,7 @@ export const CartProduct = () => {
             <div className="container">
                 <div className="title col-lg-8 col-12 mb-4 d-flex justify-content-between align-items-center">
                     <h2>My Shopping Cart</h2>
-                    <button type="button">Remove All</button>
+                    <button type="button" onClick={() => dispatch(clearBasket())}>Remove All</button>
                 </div>
                 <div className="d-flex flex-wrap justify-content-between align-items-start">
                     <div className="left col-lg-8 col-md-12 col-sm-12 col-12">
@@ -48,7 +49,7 @@ export const CartProduct = () => {
                             </li>
                             <li>
                                 <span>Total :</span>
-                                <span>165 $</span>
+                                <span>{`${calculateSubtotal()}$`}</span>
                             </li>
                         </ul>
                         <a href="#" className="col-12">
