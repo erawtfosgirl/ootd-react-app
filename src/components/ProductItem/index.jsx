@@ -2,21 +2,25 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import { addToBasket } from '../../redux/reducers/basketSlice';
+import { addToWishlist } from '../../redux/reducers/wishlistSlice';
 
 export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) => {
     const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
     const dispatch = useDispatch();
 
+    const newItem = {
+        id,
+        name,
+        thumbnail,
+        price,
+        discountPercentage,
+    }
     const handleAddToCart = () => {
-        const newItem = {
-            id,
-            name,
-            thumbnail,
-            price,
-            discountPercentage,
-            quantity: 0 // default quantity for a new item
-        }
         dispatch(addToBasket(newItem));
+        console.log("product added");
+    }
+    const handleAddToWishlist = () => {
+        dispatch(addToWishlist(newItem));
         console.log("product added");
     }
     return (
@@ -29,7 +33,7 @@ export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) 
                         alt="Image"
                     />
                 </NavLink>
-                <button className="wishlist action-box">
+                <button type='button' className="wishlist action-box" onClick={handleAddToWishlist}>
                     <i className="fa-regular fa-heart regular-icon" />
                     <i className="fa-solid fa-heart hidden solid-icon" />
                 </button>

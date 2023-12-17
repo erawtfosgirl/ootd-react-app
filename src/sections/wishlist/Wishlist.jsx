@@ -1,144 +1,31 @@
 import React from 'react'
 
-import Product1 from '../../assets/images/products/dress1_3.jpg'
+import { ProductItem } from '../../components/ProductItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { clearWishlist } from '../../redux/reducers/wishlistSlice';
 
 export const Wishlist = () => {
+    const wishlist = useSelector(state => state.wishlist);
+    const dispatch=useDispatch();
     return (
         <section className="wishlist-products-section">
             <div className="container">
                 <div className="title mb-4 d-flex justify-content-between align-items-center">
                     <h2>My Wishlist</h2>
-                    <button type="button">Remove All</button>
+                    <button type="button" onClick={()=>dispatch(clearWishlist())}>Remove All</button>
                 </div>
                 <div className="row g-3">
-                    <div className="col-lg-3 col-md-4 col-6 product-item">
-                        <div className="product-image">
-                            <a href="product.html">
-                                <img
-                                    className="img-fluid"
-                                    src={Product1}
-                                    alt="Image"
-                                />
-                            </a>
-                            <button className="action-box">
-                                <i className="fa-solid fa-xmark remove" />
-                            </button>
-                            <span className="discount-box">-20%</span>
-                            <button
-                                type="button"
-                                className="col-xl-7 col-lg-7 col-md-7 col-7 addtocart"
-                            >
-                                Add to cart
-                            </button>
-                        </div>
-                        <div className="product-details mt-2">
-                            <h5 className="product-name">
-                                <a href="#">Shoulder bag with flap</a>
-                            </h5>
-                            <div className="product-price d-flex align-items-center justify-content-center gap-2">
-                                <div className="price-regular">55 $</div>
-                                <div className="price-old">
-                                    <del> 70 $</del>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-6 product-item">
-                        <div className="product-image">
-                            <a href="product.html">
-                                <img
-                                    className="img-fluid"
-                                    src={Product1}
-                                    alt="Image"
-                                />
-                            </a>
-                            <button className="action-box">
-                                <i className="fa-solid fa-xmark remove" />
-                            </button>
-                            <span className="discount-box">-20%</span>
-                            <button
-                                type="button"
-                                className="col-xl-7 col-lg-7 col-md-7 col-7 addtocart"
-                            >
-                                Add to cart
-                            </button>
-                        </div>
-                        <div className="product-details mt-2">
-                            <h5 className="product-name">
-                                <a href="#">Shoulder bag with flap</a>
-                            </h5>
-                            <div className="product-price d-flex align-items-center justify-content-center gap-2">
-                                <div className="price-regular">55 $</div>
-                                <div className="price-old">
-                                    <del> 70 $</del>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-6 product-item">
-                        <div className="product-image">
-                            <a href="product.html">
-                                <img
-                                    className="img-fluid"
-                                    src={Product1}
-                                    alt="Image"
-                                />
-                            </a>
-                            <button className="action-box">
-                                <i className="fa-solid fa-xmark remove" />
-                            </button>
-                            <span className="discount-box">-20%</span>
-                            <button
-                                type="button"
-                                className="col-xl-7 col-lg-7 col-md-7 col-7 addtocart"
-                            >
-                                Add to cart
-                            </button>
-                        </div>
-                        <div className="product-details mt-2">
-                            <h5 className="product-name">
-                                <a href="#">Shoulder bag with flap</a>
-                            </h5>
-                            <div className="product-price d-flex align-items-center justify-content-center gap-2">
-                                <div className="price-regular">55 $</div>
-                                <div className="price-old">
-                                    <del> 70 $</del>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-3 col-md-4 col-6 product-item">
-                        <div className="product-image">
-                            <a href="product.html">
-                                <img
-                                    className="img-fluid"
-                                    src={Product1}
-                                    alt="Image"
-                                />
-                            </a>
-                            <button className="action-box">
-                                <i className="fa-solid fa-xmark remove" />
-                            </button>
-                            <span className="discount-box">-20%</span>
-                            <button
-                                type="button"
-                                className="col-xl-7 col-lg-7 col-md-7 col-7 addtocart"
-                            >
-                                Add to cart
-                            </button>
-                        </div>
-                        <div className="product-details mt-2">
-                            <h5 className="product-name">
-                                <a href="#">Shoulder bag with flap</a>
-                            </h5>
-                            <div className="product-price d-flex align-items-center justify-content-center gap-2">
-                                <div className="price-regular">55 $</div>
-                                <div className="price-old">
-                                    <del> 70 $</del>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {wishlist.map(product => (
+                        <ProductItem
+                            key={product.id}
+                            id={product.id}
+                            name={product.name}
+                            thumbnail={product.thumbnail}
+                            price={product.price}
+                            discountPercentage={product.discountPercentage}
+                        />
+                    ))}
+
                 </div>
             </div>
         </section>
