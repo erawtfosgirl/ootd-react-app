@@ -73,20 +73,23 @@ export const ProductDetail = () => {
                           value={color}
                           onChange={() => setSelectedColor(color)}
                         />
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="ionicon markicon"
-                          viewBox="0 0 512 512"
-                        >
-                          <path
-                            fill="none"
-                            stroke="white"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={32}
-                            d="M416 128L192 384l-96-96"
-                          />
-                        </svg>
+                        {selectedColor === color &&
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="ionicon markicon"
+                            viewBox="0 0 512 512"
+                          >
+                            <path
+                              fill="none"
+                              stroke="white"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={32}
+                              d="M416 128L192 384l-96-96"
+                            />
+                          </svg>
+                        }
+
                       </label>
                     ))}
                   </div>
@@ -94,7 +97,7 @@ export const ProductDetail = () => {
                     {sizes.length > 0 && <span className="txt">Size :</span>}
 
                     {sizes.map(size => (
-                      <label className="sizelabel selected" key={size}>
+                      <label className={`sizelabel ${selectedSize === size ? 'selected' : ''}`} key={size}>
                         <input
                           type="radio"
                           name="color"
