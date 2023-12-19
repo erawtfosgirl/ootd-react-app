@@ -9,6 +9,10 @@ const saveCartToLocalStorage = (cart) => {
     localStorage.setItem('cart', JSON.stringify(cart));
 };
 
+const clearCartFromLocalStorage = () => {
+    localStorage.removeItem('cart');
+};
+
 export const basketSlice = createSlice({
     name: "basket",
     initialState: loadCartFromLocalStorage(),
@@ -38,7 +42,9 @@ export const basketSlice = createSlice({
         },
         deleteFromBasket: (state, action) => {
             const productId = action.payload;
-            return state.filter(product => product.id !== productId);
+            const updatedCart= state.filter(product => product.id !== productId);
+            saveCartToLocalStorage(updatedCart);
+            return updatedCart;
         },
         incrementQuantity: (state, action) => {
             const findProd = state.find(product => product.id === action.payload);
@@ -49,6 +55,7 @@ export const basketSlice = createSlice({
             findProd.quantity--;
         },
         clearBasket: (state, action) => {
+            clearCartFromLocalStorage();
             return [];
         }
     }

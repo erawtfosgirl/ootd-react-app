@@ -7,7 +7,7 @@ export const CartProduct = () => {
     const dispatch = useDispatch();
     const basket = useSelector(state => state.basket);
 
-    
+
     const calculateSubtotal = () => {
         let subtotal = 0;
 
