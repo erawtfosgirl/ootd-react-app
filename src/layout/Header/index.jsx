@@ -10,6 +10,7 @@ import { ReactComponent as SearchSvg } from '../../assets/icons/search.svg'
 
 import { MobileSidebar } from '../../components/MobileSidebar'
 import { Search } from '../../components/Search'
+import { useSelector } from 'react-redux'
 
 
 export const Header = () => {
@@ -20,6 +21,8 @@ export const Header = () => {
 
   const { pathname } = useLocation(); // Get current location from React Router
   const isHomePage = pathname === '/'; // Check if it's the home page
+
+  const basket = useSelector(state => state.basket)
 
   const openSearch = () => {
     setIsSearchAreaOpen(true)
@@ -95,6 +98,8 @@ export const Header = () => {
               <NavLink to="/cart">
                 <CartSvg />
               </NavLink>
+              {basket.length && <span className='cart-count'>{basket.length}</span>}
+
             </div>
             <div className="user">
               <NavLink to="/signin">

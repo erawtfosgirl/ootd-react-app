@@ -25,7 +25,7 @@ export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) 
             setAlertMessage('Product added to cart successfully!');
         } catch (error) {
             console.error("Error adding product to cart:", error);
-            <AlertMessage message="Error adding product to cart. Please try again." />;
+            setAlertMessage('Error adding product to cart. Please try again.')
         }
 
     }

@@ -14,7 +14,7 @@ export const AlertMessage = ({ message, error }) => {
     }, [message]);
     return (
         showAlert && (
-            <Stack sx={{ width: '25%', position: 'fixed', top: '10%', right: '1%',zIndex:'9'}} spacing={2}>
+            <Stack sx={{ width: '25%', position: 'fixed', top: '11%', right: '1%', zIndex: '9' }} spacing={2}>
                 <Alert variant='filled' severity={error ? 'error' : 'success'}>{message}</Alert>
             </Stack>
         )

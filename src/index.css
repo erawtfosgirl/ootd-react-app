@@ -920,6 +920,23 @@ body {
     justify-content: flex-end;
     gap: 20px;
 }
+.site-header .header-actions .cart{
+    position: relative;
+}
+.site-header .header-actions .cart .cart-count{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 16px;
+    background-color: white;
+    color: black;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+}
 .site-header .header-actions .search {
     background-color: transparent;
     border: 1px solid #ffffff;

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { productData } from '../../db/productData';
 import { ProductItem } from '../../components/ProductItem';
 import { ProductImagesSlider } from '../../components/ProductImagesSlider';
+import { AlertMessage } from '../../components/AlertMessage';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../../redux/reducers/basketSlice';
 import { WishlistButton } from '../../components/WishlistButton';
@@ -16,6 +17,7 @@ export const ProductDetail = () => {
   const [productQuantity, setProductQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
 
   const { id } = useParams();
   const productId = parseInt(id);
@@ -33,11 +35,32 @@ export const ProductDetail = () => {
     setProductQuantity(prevQuantity => prevQuantity + 1);
   }
 
+  const handleAddToCart = () => {
+    try {
+      dispatch(
+        addToBasket(
+          {
+            ...foundProduct,
+            quantity: productQuantity,
+            color: selectedColor,
+            size: selectedSize
+          }
+        )
+      )
+      console.log("Product added to cart");
+      setAlertMessage('Product added to cart successfully!');
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      setAlertMessage('Error adding product to cart. Please try again.')
+    }
+  }
+
   return (
     <>
       <section className="details-section">
         <div className="container">
           <div className="row">
+            <AlertMessage message={alertMessage} />
             <div className="col-lg-5 col-md-12 col-sm-12 col-12">
               <ProductImagesSlider images={images} />
             </div>
@@ -118,17 +141,7 @@ export const ProductDetail = () => {
                         <i className="fa-solid fa-plus" />
                       </button>
                     </div>
-                    <button type="button" className=" addtocart" onClick={() =>
-                      dispatch(
-                        addToBasket(
-                          {
-                            ...foundProduct,
-                            quantity: productQuantity,
-                            color: selectedColor,
-                            size: selectedSize
-                          }
-                        )
-                      )}>
+                    <button type="button" className=" addtocart" onClick={handleAddToCart}>
                       Add to cart
                     </button>
                     <WishlistButton id={foundProduct.id} newItem={foundProduct} />
