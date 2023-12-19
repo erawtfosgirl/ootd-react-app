@@ -1,8 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const loadCartFromLocalStorage = () => {
+    const cart = localStorage.getItem('cart');
+    return cart ? JSON.parse(cart) : [];
+};
+
+const saveCartToLocalStorage = (cart) => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+};
+
 export const basketSlice = createSlice({
     name: "basket",
-    initialState: [],
+    initialState: loadCartFromLocalStorage(),
     reducers: {
         addToBasket: (state, action) => {
             const { id, price, discountPercentage, quantity = 1, color, size } = action.payload;
@@ -21,6 +30,7 @@ export const basketSlice = createSlice({
                     color: color || '',
                     size: size || ''
                 });
+                saveCartToLocalStorage(state)
             }
             //quantity || 1 checks whether quantity exists and is truthy.
             // If quantity exists and has a value (other than 0 or false), it will use that value.
