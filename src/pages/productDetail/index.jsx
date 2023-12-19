@@ -158,7 +158,6 @@ export const ProductDetail = () => {
               },
             }}
           >
-
             {productData.map(product => (
               <SwiperSlide key={product.id}>
                 <ProductItem
@@ -170,7 +169,6 @@ export const ProductDetail = () => {
                 />
               </SwiperSlide>
             ))}
-
           </Swiper>
         </div>
       </section>

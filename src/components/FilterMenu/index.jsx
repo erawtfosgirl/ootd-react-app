@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ReactComponent as ResetSvg } from '../../assets/icons/reset.svg'
+import { categoryData } from '../../db/categoryData'
 
 
-export const FilterMenu = ({isOpen,setIsOpen}) => {
+export const FilterMenu = ({ isOpen, setIsOpen }) => {
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        setCategories(categoryData);
+    })
     return (
-        <div className={`filter-menu ${isOpen ? 'active':''}`}>
+        <div className={`filter-menu ${isOpen ? 'active' : ''}`}>
             <div className="filter-container">
-                <div className="closefiltermenu text-end" onClick={()=>setIsOpen(false)}>
+                <div className="closefiltermenu text-end" onClick={() => setIsOpen(false)}>
                     <ResetSvg />
                 </div>
                 <div className="filter-options d-flex flex-column gap-4">
@@ -14,18 +19,11 @@ export const FilterMenu = ({isOpen,setIsOpen}) => {
                         <h5 className="filter-options-title">Category</h5>
                         <div className="filter-options-content">
                             <ul className="items">
-                                <li className="item">
-                                    <a href="#">Skirts</a>
-                                </li>
-                                <li className="item">
-                                    <a href="#">Blazer</a>
-                                </li>
-                                <li className="item">
-                                    <a href="#">Dress</a>
-                                </li>
-                                <li className="item">
-                                    <a href="#">Shoes</a>
-                                </li>
+                                {categories.map(category => (
+                                    <li className="item" key={category.id}>
+                                        <a href="#">{category.name}</a>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
@@ -38,7 +36,7 @@ export const FilterMenu = ({isOpen,setIsOpen}) => {
                                     <input
                                         type="number"
                                         className="input-min"
-                                        defaultValue={2500}
+                                        value={2500}
                                     />
                                 </div>
                                 <div className="separator">-</div>
@@ -47,7 +45,7 @@ export const FilterMenu = ({isOpen,setIsOpen}) => {
                                     <input
                                         type="number"
                                         className="input-max"
-                                        defaultValue={7500}
+                                        value={7500}
                                     />
                                 </div>
                             </div>
