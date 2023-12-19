@@ -2,8 +2,11 @@ import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import { addToBasket } from '../../redux/reducers/basketSlice';
 import { WishlistButton } from '../WishlistButton';
+import { AlertMessage } from '../AlertMessage';
+import { useState } from 'react';
 
 export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) => {
+    const [alertMessage, setAlertMessage] = useState('');
     const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
     const dispatch = useDispatch();
 
@@ -16,12 +19,20 @@ export const ProductItem = ({ id, name, thumbnail, price, discountPercentage }) 
     }
 
     const handleAddToCart = () => {
-        dispatch(addToBasket(newItem));
-        console.log("Product added to basket");
+        try {
+            dispatch(addToBasket(newItem));
+            console.log("Product added to cart");
+            setAlertMessage('Product added to cart successfully!');
+        } catch (error) {
+            console.error("Error adding product to cart:", error);
+            <AlertMessage message="Error adding product to cart. Please try again." />;
+        }
+
     }
 
     return (
         <div className="col-lg-3 col-md-4 col-6 product-item">
+            <AlertMessage message={alertMessage} />
             <div className="product-image">
                 <NavLink to={`/product/${id}`}>
                     <img

@@ -3,6 +3,7 @@ import { productData } from '../../db/productData';
 import { ProductItem } from '../../components/ProductItem';
 
 import { FilterMenu } from '../../components/FilterMenu';
+import { AlertMessage } from '../../components/AlertMessage';
 
 export const ShopProduct = () => {
     const [products, setProducts] = useState([]);
