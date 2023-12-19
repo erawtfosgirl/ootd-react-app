@@ -1938,3 +1938,7 @@ body {
         height: 300px;
     }
 }
+
+.swiper-slide .product-item{
+    width: 100%;
+}

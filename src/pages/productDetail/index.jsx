@@ -6,6 +6,11 @@ import { ProductImagesSlider } from '../../components/ProductImagesSlider';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../../redux/reducers/basketSlice';
 import { WishlistButton } from '../../components/WishlistButton';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 export const ProductDetail = () => {
   const [productQuantity, setProductQuantity] = useState(1);
@@ -133,18 +138,40 @@ export const ProductDetail = () => {
       </section>
       <section className="related-products my-5">
         <div className="container">
-          <div className="row g-3">
+          <Swiper
+            slidesPerView={2}
+            spaceBetween={10}
+            navigation
+            modules={[Navigation]}
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+              },
+            }}
+          >
+
             {productData.map(product => (
-              <ProductItem
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                thumbnail={product.thumbnail}
-                price={product.price}
-                discountPercentage={product.discountPercentage}
-              />
+              <SwiperSlide key={product.id}>
+                <ProductItem
+                  id={product.id}
+                  name={product.name}
+                  thumbnail={product.thumbnail}
+                  price={product.price}
+                  discountPercentage={product.discountPercentage}
+                />
+              </SwiperSlide>
             ))}
-          </div>
+
+          </Swiper>
         </div>
       </section>
     </>

@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { productData } from '../../db/productData';
 import { ProductItem } from '../../components/ProductItem';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 export const TopProducts = () => {
     const [products, setProducts] = useState([]);
@@ -16,18 +21,40 @@ export const TopProducts = () => {
                     <h2>Trending</h2>
                     <div className="txt">Top view in this week</div>
                 </div>
-                <div className="row g-3">
+                <Swiper
+                    slidesPerView={2}
+                    spaceBetween={10}
+                    navigation
+                    modules={[Navigation]}
+                    breakpoints={{
+                        640: {
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
+                        768: {
+                            slidesPerView: 4,
+                            spaceBetween: 20,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                            spaceBetween: 20,
+                        },
+                    }}
+                >
+
                     {products.map(product => (
-                        <ProductItem
-                            key={product.id}
-                            id={product.id}
-                            name={product.name}
-                            thumbnail={product.thumbnail}
-                            price={product.price}
-                            discountPercentage={product.discountPercentage}
-                        />
+                        <SwiperSlide key={product.id}>
+                            <ProductItem
+                                id={product.id}
+                                name={product.name}
+                                thumbnail={product.thumbnail}
+                                price={product.price}
+                                discountPercentage={product.discountPercentage}
+                            />
+                        </SwiperSlide>
                     ))}
-                </div>
+
+                </Swiper>
             </div>
         </section>
 
