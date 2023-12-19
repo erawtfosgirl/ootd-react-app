@@ -14,21 +14,23 @@ import 'swiper/css/navigation';
 
 export const ProductDetail = () => {
   const [productQuantity, setProductQuantity] = useState(1);
+  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
 
   const { id } = useParams();
   const productId = parseInt(id);
   const foundProduct = productData.find(item => item.id === productId);
-  const { name, discountPercentage, price, description, material, images } = foundProduct;
+  const { name, discountPercentage, price, description, material, sizes, colors, images } = foundProduct;
 
   const discountedPrice = discountPercentage > 0 ? price - (price * discountPercentage * 0.01) : null;
 
   const dispatch = useDispatch();
 
   const decreaseQuantity = () => {
-    setProductQuantity(productQuantity - 1);
+    setProductQuantity(prevQuantity => prevQuantity - 1);
   }
   const increaseQuantity = () => {
-    setProductQuantity(productQuantity + 1);
+    setProductQuantity(prevQuantity => prevQuantity + 1);
   }
 
   return (
@@ -59,51 +61,49 @@ export const ProductDetail = () => {
                 <form action="" className="d-flex flex-column gap-3">
                   <div className="product-info-colors d-flex align-items-center gap-2">
                     <span className="txt">Color :</span>
-                    <label
-                      className="colorlabel"
-                      style={{ backgroundColor: "#9bab37" }}
-                    >
-                      <input type="radio" name="color" defaultValue="#9BAB37" />
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="ionicon markicon"
-                        viewBox="0 0 512 512"
+                    {colors.map(color => (
+                      <label
+                        className="colorlabel"
+                        style={{ backgroundColor: `${color}` }}
+                        key={color}
                       >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={32}
-                          d="M416 128L192 384l-96-96"
+                        <input
+                          type="radio"
+                          name="color"
+                          value={color}
+                          onChange={() => setSelectedColor(color)}
                         />
-                      </svg>
-                    </label>
-                    <label
-                      className="colorlabel"
-                      style={{ backgroundColor: "#edc321" }}
-                    >
-                      <input type="radio" name="color" defaultValue="#edc321" />
-                    </label>
-                    <label
-                      className="colorlabel"
-                      style={{ backgroundColor: "#3780ab" }}
-                    >
-                      <input type="radio" name="color" defaultValue="#3780ab" />
-                    </label>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="ionicon markicon"
+                          viewBox="0 0 512 512"
+                        >
+                          <path
+                            fill="none"
+                            stroke="white"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={32}
+                            d="M416 128L192 384l-96-96"
+                          />
+                        </svg>
+                      </label>
+                    ))}
                   </div>
                   <div className="product-info-sizes d-flex align-items-center gap-2">
-                    <span className="txt">Size :</span>
-                    <label className="sizelabel selected">
-                      <input type="radio" name="color" defaultValue="S" />
-                      XS
-                    </label>
-                    <label className="sizelabel">
-                      <input type="radio" name="color" defaultValue="S" />S
-                    </label>
-                    <label className="sizelabel">
-                      <input type="radio" name="color" defaultValue="S" />M
-                    </label>
+                    {sizes.length > 0 && <span className="txt">Size :</span>}
+
+                    {sizes.map(size => (
+                      <label className="sizelabel selected" key={size}>
+                        <input
+                          type="radio"
+                          name="color"
+                          value={size}
+                          onChange={() => setSelectedSize(size)}
+                        />
+                        {size}
+                      </label>
+                    ))}
                   </div>
                   <div className="product-options d-flex align-items-center gap-3">
                     <div className="product-quantity col-lg-2 col-md-2 col-sm-3 col-3">
@@ -115,7 +115,17 @@ export const ProductDetail = () => {
                         <i className="fa-solid fa-plus" />
                       </button>
                     </div>
-                    <button type="button" className=" addtocart" onClick={() => dispatch(addToBasket({ ...foundProduct, quantity: productQuantity }))}>
+                    <button type="button" className=" addtocart" onClick={() =>
+                      dispatch(
+                        addToBasket(
+                          {
+                            ...foundProduct,
+                            quantity: productQuantity,
+                            color: selectedColor,
+                            size: selectedSize
+                          }
+                        )
+                      )}>
                       Add to cart
                     </button>
                     <WishlistButton id={foundProduct.id} newItem={foundProduct} />

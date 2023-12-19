@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { decrementQuantity, deleteFromBasket, incrementQuantity } from '../../redux/reducers/basketSlice';
 import { WishlistButton } from '../WishlistButton';
 
-export const CartItem = ({ id, thumbnail, name, quantity, price, discountPercentage }) => {
+export const CartItem = ({ id, thumbnail, name, quantity, price, discountPercentage, color, size }) => {
     const dispatch = useDispatch();
     const newItem = {
         id,
@@ -12,6 +12,8 @@ export const CartItem = ({ id, thumbnail, name, quantity, price, discountPercent
         thumbnail,
         price,
         discountPercentage,
+        color,
+        size
     }
     return (
         <div className="cart-item col-lg-12 col-md-12 col-sm-12 col-12 d-flex align-items-center">
@@ -32,13 +34,16 @@ export const CartItem = ({ id, thumbnail, name, quantity, price, discountPercent
                     <span className="total">{`${quantity * price}$`}</span>
                 </div>
                 <div className="middle d-flex flex-column gap-2">
-                    <div>
-                        <span>Size:</span>
-                        <span>S</span>
-                    </div>
+                    {size &&
+                        <div>
+                            <span>Size:</span>
+                            <span>{size}</span>
+                        </div>
+                    }
+                    
                     <div>
                         <span>Color:</span>
-                        <span>Black</span>
+                        <span>{color}</span>
                     </div>
                     <div>
                         <span>Price:</span>

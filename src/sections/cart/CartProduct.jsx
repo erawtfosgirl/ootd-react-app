@@ -38,6 +38,8 @@ export const CartProduct = () => {
                                         quantity={product.quantity}
                                         price={product.price}
                                         discountPercentage={product.discountPercentage}
+                                        color={product.color}
+                                        size={product.size}
                                     />
                                 ))}
                             </div>
