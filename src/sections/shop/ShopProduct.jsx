@@ -3,14 +3,17 @@ import { productData } from '../../db/productData';
 import { ProductItem } from '../../components/ProductItem';
 
 import { FilterMenu } from '../../components/FilterMenu';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProducts } from '../../redux/reducers/productsSlice';
 
 export const ShopProduct = () => {
-    const [products, setProducts] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
+    const dispatch = useDispatch();
+    const products = useSelector(state => state.products.filteredProducts);
 
     useEffect(() => {
-        setProducts(productData);
-    }, [])
+        dispatch(setProducts(productData));
+    }, [dispatch])
 
     const openSidebar = () => {
         setIsOpen(true)

@@ -16,9 +16,7 @@ export const FilterMenu = ({ isOpen, setIsOpen }) => {
 
     const dispatch = useDispatch();
 
-    const applyFilter = () => {
-        dispatch(filterProducts({ color: selectedColor, size: selectedSize }));
-    };
+   
 
     useEffect(() => {
         setCategories(categoryData);
@@ -145,7 +143,7 @@ export const FilterMenu = ({ isOpen, setIsOpen }) => {
                             </div>
                         </div>
                     </div>
-                    <button className='btn btn-dark' onClick={applyFilter}>Filter</button>
+                    <button className='btn btn-dark'>Filter</button>
                 </div>
             </div>
         </div>
