@@ -98,8 +98,7 @@ export const Header = () => {
               <NavLink to="/cart">
                 <CartSvg />
               </NavLink>
-              {basket.length && <span className='cart-count'>{basket.length}</span>}
-
+              {basket.length>0 && <span className='cart-count'>{basket.length}</span>}
             </div>
             <div className="user">
               <NavLink to="/signin">

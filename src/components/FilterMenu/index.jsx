@@ -1,13 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { ReactComponent as ResetSvg } from '../../assets/icons/reset.svg'
 import { categoryData } from '../../db/categoryData'
+import { colorData } from '../../db/colorData'
+import { sizeData } from '../../db/sizeData'
+import { useDispatch } from 'react-redux'
+import { filterProducts } from '../../redux/reducers/productsSlice'
 
 
 export const FilterMenu = ({ isOpen, setIsOpen }) => {
     const [categories, setCategories] = useState([]);
+    const [colors, setColors] = useState([]);
+    const [sizes, setSizes] = useState([]);
+    const [selectedColor, setSelectedColor] = useState('');
+    const [selectedSize, setSelectedSize] = useState('');
+
+    const dispatch = useDispatch();
+
+    const applyFilter = () => {
+        dispatch(filterProducts({ color: selectedColor, size: selectedSize }));
+    };
+
     useEffect(() => {
         setCategories(categoryData);
+        setColors(colorData);
+        setSizes(sizeData.clothesSizes);
     })
+
     return (
         <div className={`filter-menu ${isOpen ? 'active' : ''}`}>
             <div className="filter-container">
@@ -76,54 +94,36 @@ export const FilterMenu = ({ isOpen, setIsOpen }) => {
                         <h5 className="filter-options-title">Color</h5>
                         <div className="filter-options-content">
                             <div className="filter-colors">
-                                <div className="color-item">
-                                    <a href="#">
-                                        <div
-                                            className="color-option"
-                                            style={{ backgroundColor: "aqua" }}
+                                {colors.map(color => (
+                                    <label
+                                        className="colorlabel"
+                                        style={{ backgroundColor: `${color.name}` }}
+                                        key={color.id}
+                                    >
+                                        <input
+                                            type="radio"
+                                            name="color"
+                                            value={color.name}
+                                            onChange={() => setSelectedColor(color.name)}
                                         />
-                                    </a>
-                                </div>
-                                <div className="color-item">
-                                    <a href="#">
-                                        <div
-                                            className="color-option"
-                                            style={{ backgroundColor: "rgb(204, 255, 0)" }}
-                                        />
-                                    </a>
-                                </div>
-                                <div className="color-item">
-                                    <a href="#">
-                                        <div
-                                            className="color-option"
-                                            style={{ backgroundColor: "rgb(186, 60, 165)" }}
-                                        ></div>
-                                    </a>
-                                </div>
-                                <div className="color-item">
-                                    <a href="#">
-                                        <div
-                                            className="color-option"
-                                            style={{ backgroundColor: "rgb(130, 135, 135)" }}
-                                        ></div>
-                                    </a>
-                                </div>
-                                <div className="color-item">
-                                    <a href="#">
-                                        <div
-                                            className="color-option"
-                                            style={{ backgroundColor: "rgb(0, 0, 0)" }}
-                                        />
-                                    </a>
-                                </div>
-                                <div className="color-item">
-                                    <a href="#">
-                                        <div
-                                            className="color-option"
-                                            style={{ backgroundColor: "rgb(123, 198, 85)" }}
-                                        ></div>
-                                    </a>
-                                </div>
+                                        {selectedColor === color.name &&
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="ionicon markicon"
+                                                viewBox="0 0 512 512"
+                                            >
+                                                <path
+                                                    fill="none"
+                                                    stroke="white"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={32}
+                                                    d="M416 128L192 384l-96-96"
+                                                />
+                                            </svg>
+                                        }
+                                    </label>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -131,34 +131,21 @@ export const FilterMenu = ({ isOpen, setIsOpen }) => {
                         <h5 className="filter-options-title">Size</h5>
                         <div className="filter-options-content">
                             <div className="filter-sizes">
-                                <div className="size-item">
-                                    <a href="#">
-                                        <div className="size-option">XS</div>
-                                    </a>
-                                </div>
-                                <div className="size-item">
-                                    <a href="#">
-                                        <div className="size-option">S</div>
-                                    </a>
-                                </div>
-                                <div className="size-item">
-                                    <a href="#">
-                                        <div className="size-option">M</div>
-                                    </a>
-                                </div>
-                                <div className="size-item">
-                                    <a href="#">
-                                        <div className="size-option">L</div>
-                                    </a>
-                                </div>
-                                <div className="size-item">
-                                    <a href="#">
-                                        <div className="size-option">XL</div>
-                                    </a>
-                                </div>
+                                {sizes.map(size => (
+                                    <label className={`sizelabel ${selectedSize === size.name ? 'selected' : ''}`} key={size.id}>
+                                        <input
+                                            type="radio"
+                                            name="color"
+                                            value={size.name}
+                                            onChange={() => setSelectedSize(size.name)}
+                                        />
+                                        {size.name}
+                                    </label>
+                                ))}
                             </div>
                         </div>
                     </div>
+                    <button className='btn btn-dark' onClick={applyFilter}>Filter</button>
                 </div>
             </div>
         </div>
