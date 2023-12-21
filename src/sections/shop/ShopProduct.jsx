@@ -56,7 +56,10 @@ export const ShopProduct = () => {
             {isOpen && (
                 <div className="overlay" style={{ display: 'block' }} onClick={closeSidebar}></div>
             )}
-            <FilterMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+            <FilterMenu
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+            />
         </section>
 
     )

@@ -1710,6 +1710,61 @@ body {
     border-radius: 14px;
     border: 1px solid #d9d9d9;
 }
+.filter-options-content .categorylabel {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.filter-options-content .categorylabel input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.filter-options-content .categorylabel .checkmark {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    outline: 0.3px solid #d9d9d9;
+    border: 0.3px solid white;
+}
+.filter-options-content .categorylabel .checkmark:hover {
+    background-color: #ccc;
+}
+.filter-options-content .categorylabel input:checked ~ .checkmark {
+    background-color: darkgray;
+}
+.filter-options-content .categorylabel .checkmark::after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+.filter-options-content .categorylabel input:checked ~ .checkmark::after{
+    display: block;
+}
+.filter-options-content .categorylabel .checkmark::after {
+    left: 5px;
+    top: 2px;
+    width: 7px;
+    height: 13px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
 .shop-products-section .active {
     translate: 0 0;
 }

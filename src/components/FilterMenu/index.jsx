@@ -3,26 +3,50 @@ import { ReactComponent as ResetSvg } from '../../assets/icons/reset.svg'
 import { categoryData } from '../../db/categoryData'
 import { colorData } from '../../db/colorData'
 import { sizeData } from '../../db/sizeData'
-import { useDispatch } from 'react-redux'
-import { filterProducts } from '../../redux/reducers/productsSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { filterProducts, setFilters } from '../../redux/reducers/productsSlice'
 
 
-export const FilterMenu = ({ isOpen, setIsOpen }) => {
+export const FilterMenu = ({ isOpen, setIsOpen, applyFilter }) => {
     const [categories, setCategories] = useState([]);
     const [colors, setColors] = useState([]);
     const [sizes, setSizes] = useState([]);
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState([]);
 
     const dispatch = useDispatch();
-
-   
 
     useEffect(() => {
         setCategories(categoryData);
         setColors(colorData);
         setSizes(sizeData.clothesSizes);
-    })
+    }, [])
+
+    const handleCategories = (e) => {
+        const { value, checked } = e.target
+        setSelectedCategories(prev => {
+            if (checked) {
+                return [...prev, value]
+            }
+            else {
+                return prev.filter(category => category !== value); // Remove value from selectedCategories
+            }
+        })
+    };
+
+    const handleFilter = () => {
+        dispatch(
+            setFilters({
+                categories: selectedCategories,
+                color: selectedColor,
+                size: selectedSize,
+            })
+        );
+        setIsOpen(false);
+    }
+
+    const products=useSelector(state=>state.products.filteredProducts)
 
     return (
         <div className={`filter-menu ${isOpen ? 'active' : ''}`}>
@@ -35,9 +59,20 @@ export const FilterMenu = ({ isOpen, setIsOpen }) => {
                         <h5 className="filter-options-title">Category</h5>
                         <div className="filter-options-content">
                             <ul className="items">
+
                                 {categories.map(category => (
-                                    <li className="item" key={category.id}>
-                                        <a href="#">{category.name}</a>
+                                    <li key={category.id}>
+                                        <label className="categorylabel">
+                                            <input
+                                                type="checkbox"
+                                                name="color"
+                                                value={category.name}
+                                                checked={selectedCategories.includes(category.name)}
+                                                onChange={handleCategories}
+                                            />
+                                            <span className='checkmark'></span>
+                                            {category.name}
+                                        </label>
                                     </li>
                                 ))}
                             </ul>
@@ -143,7 +178,7 @@ export const FilterMenu = ({ isOpen, setIsOpen }) => {
                             </div>
                         </div>
                     </div>
-                    <button className='btn btn-dark'>Filter</button>
+                    <button type='button' className='btn btn-dark' onClick={handleFilter}>Filter</button>
                 </div>
             </div>
         </div>

@@ -36,4 +36,9 @@ export const categoryData = [
         "name": "Bags",
         "image": category6,
     },
+    {
+        "id": 7,
+        "name": "Sweatshirts & Hoodies",
+        "image": category1
+    }
 ]

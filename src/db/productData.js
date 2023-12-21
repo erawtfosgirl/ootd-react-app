@@ -82,8 +82,8 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": [],
-        "colors": ["black", "gray"],
-        "category": "Bag",
+        "colors": ["red", "purple"],
+        "category": "Bags",
         "thumbnail": product2_1,
         "images": [
             product2_1,
@@ -100,8 +100,8 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
-        "colors": ["black", "gray"],
-        "category": "Hoodie",
+        "colors": ["white", "gray"],
+        "category": "Sweatshirts & Hoodies",
         "thumbnail": product3_1,
         "images": [
             product3_1,
@@ -119,7 +119,7 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": [36, 37, 38, 39, 40],
-        "colors": ["black", "gray"],
+        "colors": ["blue", "yellow"],
         "category": "Shoes",
         "thumbnail": product4_1,
         "images": [
@@ -138,7 +138,7 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
-        "colors": ["black", "gray"],
+        "colors": ["orange", "gray"],
         "category": "Trousers",
         "thumbnail": product5_1,
         "images": [
@@ -159,7 +159,7 @@ export const productData = [
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
         "colors": ["black", "gray"],
-        "category": "Sweatshirt",
+        "category": "Sweatshirts & Hoodies",
         "thumbnail": product6_1,
         "images": [
             product6_1,
@@ -178,8 +178,8 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
-        "colors": ["black", "gray"],
-        "category": "Accesories",
+        "colors": ["brown", "gray"],
+        "category": "Accessories",
         "thumbnail": product7_1,
         "images": [
             product7_1,
@@ -197,8 +197,8 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": [36,37,38,39],
-        "colors": ["black", "gray"],
-        "category": "Accesories",
+        "colors": ["red", "gray"],
+        "category": "Shoes",
         "thumbnail": product8_1,
         "images": [
             product8_1,
@@ -217,8 +217,8 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
-        "colors": ["black", "gray"],
-        "category": "Accesories",
+        "colors": ["black", "blue"],
+        "category": "Dress",
         "thumbnail": product9_1,
         "images": [
             product9_1,
@@ -236,8 +236,8 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
-        "colors": ["black", "gray"],
-        "category": "Accesories",
+        "colors": ["purple", "gray"],
+        "category": "",
         "thumbnail": product10_1,
         "images": [
             product10_1,
@@ -256,8 +256,8 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
-        "colors": ["black", "gray"],
-        "category": "Accesories",
+        "colors": ["black", "yellow"],
+        "category": "Jeans",
         "thumbnail": product11_1,
         "images": [
             product11_1,
@@ -275,14 +275,15 @@ export const productData = [
         "description": "Sweet and Lovely knitted sweater with turtleneck and long sleeves, ready to be your best friend during changing weather. Soft colorss selection will easy to mix-n-match with your wardrobe.",
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
-        "colors": ["black", "gray"],
-        "category": "Accesories",
+        "colors": ["black", "white"],
+        "category": "Skirts",
         "thumbnail": product12_1,
         "images": [
             product12_1,
             product12_2,
             product12_3,
             product12_4,
+            product12_5
         ],
     },
 ]
