@@ -3,17 +3,20 @@ import { ReactComponent as ResetSvg } from '../../assets/icons/reset.svg'
 import { categoryData } from '../../db/categoryData'
 import { colorData } from '../../db/colorData'
 import { sizeData } from '../../db/sizeData'
-import { useDispatch, useSelector } from 'react-redux'
-import { filterProducts, setFilters } from '../../redux/reducers/productsSlice'
+import { useDispatch } from 'react-redux'
+import { setFilters } from '../../redux/reducers/productsSlice'
 
 
-export const FilterMenu = ({ isOpen, setIsOpen, applyFilter }) => {
+export const FilterMenu = ({ isOpen, setIsOpen }) => {
     const [categories, setCategories] = useState([]);
     const [colors, setColors] = useState([]);
     const [sizes, setSizes] = useState([]);
-    const [selectedColor, setSelectedColor] = useState('');
-    const [selectedSize, setSelectedSize] = useState('');
+
     const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectedColors, setSelectedColors] = useState([]);
+    const [selectedSizes, setSelectedSizes] = useState([]);
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(400);
 
     const dispatch = useDispatch();
 
@@ -35,18 +38,42 @@ export const FilterMenu = ({ isOpen, setIsOpen, applyFilter }) => {
         })
     };
 
+    const handleColors = (e) => {
+        const { value, checked } = e.target
+        setSelectedColors(prev => {
+            if (checked) {
+                return [...prev, value]
+            }
+            else {
+                return prev.filter(color => color !== value);  // Remove value from selectedColors
+            }
+        })
+    }
+
+    const handleSizes = (e) => {
+        const { value, checked } = e.target
+        setSelectedSizes(prev => {
+            if (checked) {
+                return [...prev, value]
+            }
+            else {
+                return prev.filter(size => size !== value);  // Remove value from selectedSizes
+            }
+        })
+    }
+
     const handleFilter = () => {
         dispatch(
             setFilters({
                 categories: selectedCategories,
-                color: selectedColor,
-                size: selectedSize,
+                colors: selectedColors,
+                sizes: selectedSizes,
+                minPrice: parseInt(minPrice),
+                maxPrice: parseInt(maxPrice)
             })
         );
         setIsOpen(false);
     }
-
-    const products=useSelector(state=>state.products.filteredProducts)
 
     return (
         <div className={`filter-menu ${isOpen ? 'active' : ''}`}>
@@ -57,9 +84,8 @@ export const FilterMenu = ({ isOpen, setIsOpen, applyFilter }) => {
                 <div className="filter-options d-flex flex-column gap-4">
                     <div className="filter-option-item">
                         <h5 className="filter-options-title">Category</h5>
-                        <div className="filter-options-content">
+                        <div className="filter-options-content mt-4">
                             <ul className="items">
-
                                 {categories.map(category => (
                                     <li key={category.id}>
                                         <label className="categorylabel">
@@ -87,7 +113,8 @@ export const FilterMenu = ({ isOpen, setIsOpen, applyFilter }) => {
                                     <input
                                         type="number"
                                         className="input-min"
-                                        value={2500}
+                                        value={minPrice}
+                                        onChange={(e) => setMinPrice(e.target.value)}
                                     />
                                 </div>
                                 <div className="separator">-</div>
@@ -96,7 +123,8 @@ export const FilterMenu = ({ isOpen, setIsOpen, applyFilter }) => {
                                     <input
                                         type="number"
                                         className="input-max"
-                                        value={7500}
+                                        value={maxPrice}
+                                        onChange={(e) => setMaxPrice(e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -108,17 +136,19 @@ export const FilterMenu = ({ isOpen, setIsOpen, applyFilter }) => {
                                     type="range"
                                     className="range-min"
                                     min={0}
-                                    max={10000}
-                                    defaultValue={2500}
-                                    step={100}
+                                    max={400}
+                                    value={minPrice}
+                                    onChange={(e)=>setMinPrice(e.target.value)}
+                                    step={1}
                                 />
                                 <input
                                     type="range"
                                     className="range-max"
                                     min={0}
-                                    max={10000}
-                                    defaultValue={7500}
-                                    step={100}
+                                    max={400}
+                                    value={maxPrice}
+                                    onChange={(e)=>setMaxPrice(e.target.value)}
+                                    step={1}
                                 />
                             </div>
                         </div>
@@ -134,12 +164,13 @@ export const FilterMenu = ({ isOpen, setIsOpen, applyFilter }) => {
                                         key={color.id}
                                     >
                                         <input
-                                            type="radio"
+                                            type="checkbox"
                                             name="color"
                                             value={color.name}
-                                            onChange={() => setSelectedColor(color.name)}
+                                            checked={selectedColors.includes(color.name)}
+                                            onChange={handleColors}
                                         />
-                                        {selectedColor === color.name &&
+                                        {selectedColors.includes(color.name) &&
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 className="ionicon markicon"
@@ -165,12 +196,13 @@ export const FilterMenu = ({ isOpen, setIsOpen, applyFilter }) => {
                         <div className="filter-options-content">
                             <div className="filter-sizes">
                                 {sizes.map(size => (
-                                    <label className={`sizelabel ${selectedSize === size.name ? 'selected' : ''}`} key={size.id}>
+                                    <label className={`sizelabel ${selectedSizes.includes(size.name) ? 'selected' : ''}`} key={size.id}>
                                         <input
-                                            type="radio"
+                                            type="checkbox"
                                             name="color"
                                             value={size.name}
-                                            onChange={() => setSelectedSize(size.name)}
+                                            checked={selectedSizes.includes(size.name)}
+                                            onChange={handleSizes}
                                         />
                                         {size.name}
                                     </label>

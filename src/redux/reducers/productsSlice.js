@@ -12,15 +12,15 @@ export const productsSlice = createSlice({
             state.filteredProducts = action.payload
         },
         setFilters: (state, action) => {
-            const { categories, minPrice, maxPrice, color, size } = action.payload;
+            const { categories, colors, sizes, minPrice, maxPrice } = action.payload;
 
             state.filteredProducts = state.allProducts.filter((product) => {
-                const passCategory = categories.length === 0 || categories.includes(product.category.toLowerCase());
-                const passPrice = (!minPrice || product.price >= minPrice) && (!maxPrice || product.price <= maxPrice);
-                const passColor = !color || product.color === color;
-                const passSize = !size || product.size === size;
+                const passCategory = categories.length === 0 || categories.includes(product.category);
+                const passPrice = product.price >= minPrice && product.price <= maxPrice;
+                const passColor = colors.length === 0 || product.colors.some(color => colors.includes(color));
+                const passSize = sizes.length === 0 || product.sizes.some(size => sizes.includes(size));
 
-                return passCategory && passPrice && passColor && passSize;
+                return passCategory && passPrice && passColor && passSize
             });
         },
 
