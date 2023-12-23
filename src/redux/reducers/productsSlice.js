@@ -1,5 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const sortProductsBy = (products, sortBy) => {
+    switch (sortBy) {
+        case 1:
+            return [...products].sort((a, b) => a.price - b.price);
+        case 2:
+            return [...products].sort((a, b) => b.price - a.price);
+        case 3:
+            return [...products].sort((a, b) => a.name.localeCompare(b.name));
+        default:
+            return [...products].sort((a, b) => a.price - b.price);
+    }
+};
+
 export const productsSlice = createSlice({
     name: "products",
     initialState: {
@@ -23,39 +36,14 @@ export const productsSlice = createSlice({
 
                 return passCategory && passPrice && passColor && passSize
             });
-            switch (state.sortBy) {
-                case 1:
-                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.price - b.price);
-                    break;
-                case 2:
-                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => b.price - a.price);
-                    break;
-                case 3:
-                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.name.localeCompare(b.name));
-                default:
-                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.price - b.price);
-                    break;
-            }
 
+            state.filteredProducts = sortProductsBy(state.filteredProducts, state.sortBy);
         },
         setSortBy: (state, action) => {
             state.sortBy = action.payload
         },
         sortProducts: (state, action) => {
-
-            switch (state.sortBy) {
-                case 1:
-                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.price - b.price);
-                    break;
-                case 2:
-                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => b.price - a.price);
-                    break;
-                case 3:
-                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.name.localeCompare(b.name));
-                default:
-                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.price - b.price);
-                    break;
-            }
+            state.filteredProducts = sortProductsBy(state.filteredProducts, state.sortBy);
         }
 
     }
