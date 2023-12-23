@@ -4,7 +4,8 @@ export const productsSlice = createSlice({
     name: "products",
     initialState: {
         allProducts: [],
-        filteredProducts: []
+        filteredProducts: [],
+        sortBy: 1
     },
     reducers: {
         setProducts: (state, action) => {
@@ -22,11 +23,7 @@ export const productsSlice = createSlice({
 
                 return passCategory && passPrice && passColor && passSize
             });
-        },
-        sortProducts: (state, action) => {
-            const { sortBy } = action.payload;
-            console.log(sortBy);
-            switch (sortBy) {
+            switch (state.sortBy) {
                 case 1:
                     state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.price - b.price);
                     break;
@@ -36,6 +33,27 @@ export const productsSlice = createSlice({
                 case 3:
                     state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.name.localeCompare(b.name));
                 default:
+                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.price - b.price);
+                    break;
+            }
+
+        },
+        setSortBy: (state, action) => {
+            state.sortBy = action.payload
+        },
+        sortProducts: (state, action) => {
+
+            switch (state.sortBy) {
+                case 1:
+                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.price - b.price);
+                    break;
+                case 2:
+                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => b.price - a.price);
+                    break;
+                case 3:
+                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.name.localeCompare(b.name));
+                default:
+                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.price - b.price);
                     break;
             }
         }
@@ -43,5 +61,5 @@ export const productsSlice = createSlice({
     }
 })
 
-export const { setProducts, setFilters, sortProducts } = productsSlice.actions;
+export const { setProducts, setFilters, setSortBy, sortProducts } = productsSlice.actions;
 export default productsSlice.reducer;

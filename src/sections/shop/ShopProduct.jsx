@@ -4,24 +4,24 @@ import { ProductItem } from '../../components/ProductItem';
 
 import { FilterMenu } from '../../components/FilterMenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts, sortProducts } from '../../redux/reducers/productsSlice';
+import { setProducts, setSortBy, sortProducts } from '../../redux/reducers/productsSlice';
 
 export const ShopProduct = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [sortBy, setSortBy] = useState(1);
     const dispatch = useDispatch();
     const products = useSelector(state => state.products.filteredProducts);
+    const sortBy = useSelector(state => state.products.sortBy)
 
     useEffect(() => {
         dispatch(setProducts(productData));
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(sortProducts({ sortBy }))
+        dispatch(sortProducts())
     }, [dispatch, sortBy])
 
     const handleSort = (e) => {
-        setSortBy(parseInt(e.target.value, 10));
+        dispatch(setSortBy(parseInt(e.target.value, 10)))
     };
 
     const openSidebar = () => {
