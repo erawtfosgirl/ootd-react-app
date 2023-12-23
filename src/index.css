@@ -1480,7 +1480,7 @@ body {
     font-size: 20px;
 }
 .shop-products-section .title .options {
-    width: 15%;
+    width: 18%;
     border-radius: 20px;
     cursor: pointer;
     font-size: 14px;
@@ -1676,6 +1676,12 @@ body {
     gap: 10px;
     margin: 20px 0;
 }
+.shop-products-section .noresultbox{
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .filter-sizes .sizelabel {
     height: 30px;
     width: 40px;
@@ -1771,7 +1777,7 @@ body {
 
 @media screen and (max-width: 1024px) {
     .shop-products-section .title .options {
-        width: 30%;
+        width: 40%;
     }
     .shop-products-section .filter-menu {
         width: 50%;
@@ -1779,7 +1785,7 @@ body {
 }
 @media screen and (max-width: 768px) {
     .shop-products-section .title .options {
-        width: 50%;
+        width: 55%;
     }
     .shop-products-section .filter-menu {
         width: 70%;

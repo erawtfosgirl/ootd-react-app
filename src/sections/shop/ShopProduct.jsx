@@ -4,16 +4,25 @@ import { ProductItem } from '../../components/ProductItem';
 
 import { FilterMenu } from '../../components/FilterMenu';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProducts } from '../../redux/reducers/productsSlice';
+import { setProducts, sortProducts } from '../../redux/reducers/productsSlice';
 
 export const ShopProduct = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [sortBy, setSortBy] = useState(1);
     const dispatch = useDispatch();
     const products = useSelector(state => state.products.filteredProducts);
 
     useEffect(() => {
         dispatch(setProducts(productData));
     }, [dispatch])
+
+    useEffect(() => {
+        dispatch(sortProducts({ sortBy }))
+    }, [dispatch, sortBy])
+
+    const handleSort = (e) => {
+        setSortBy(parseInt(e.target.value, 10));
+    };
 
     const openSidebar = () => {
         setIsOpen(true)
@@ -32,26 +41,32 @@ export const ShopProduct = () => {
                     <select
                         className="form-select options"
                         aria-label="Default select example"
+                        value={sortBy}
+                        onChange={handleSort}
                     >
-                        <option selected="" value={1}>
-                            Sort by Position
-                        </option>
-                        <option value={2}>Sort by Price</option>
-                        <option value={3}>Sort by Product Name</option>
+                        <option value={1}>Priced from low to high</option>
+                        <option value={2}>Priced from high to low</option>
+                        <option value={3}>Sort by product name</option>
                     </select>
                 </div>
-                <div className="row g-3">
-                    {products.map(product => (
-                        <ProductItem
-                            key={product.id}
-                            id={product.id}
-                            name={product.name}
-                            thumbnail={product.thumbnail}
-                            price={product.price}
-                            discountPercentage={product.discountPercentage}
-                        />
-                    ))}
-                </div>
+                {products.length > 0 ? (
+                    <div className="row g-3">
+                        {products.map(product => (
+                            <ProductItem
+                                key={product.id}
+                                id={product.id}
+                                name={product.name}
+                                thumbnail={product.thumbnail}
+                                price={product.price}
+                                discountPercentage={product.discountPercentage}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div className='noresultbox'>
+                        <h3>No result found</h3>
+                    </div>
+                )}
             </div>
             {isOpen && (
                 <div className="overlay" style={{ display: 'block' }} onClick={closeSidebar}></div>

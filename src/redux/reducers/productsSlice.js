@@ -23,9 +23,25 @@ export const productsSlice = createSlice({
                 return passCategory && passPrice && passColor && passSize
             });
         },
+        sortProducts: (state, action) => {
+            const { sortBy } = action.payload;
+            console.log(sortBy);
+            switch (sortBy) {
+                case 1:
+                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.price - b.price);
+                    break;
+                case 2:
+                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => b.price - a.price);
+                    break;
+                case 3:
+                    state.filteredProducts = [...state.filteredProducts].sort((a, b) => a.name.localeCompare(b.name));
+                default:
+                    break;
+            }
+        }
 
     }
 })
 
-export const { setProducts, setFilters } = productsSlice.actions;
+export const { setProducts, setFilters, sortProducts } = productsSlice.actions;
 export default productsSlice.reducer;
