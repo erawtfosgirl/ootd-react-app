@@ -324,17 +324,7 @@ body {
 }
 
 .faq-section {
-    text-align: center;
     letter-spacing: 1px;
-}
-.faq-section h5 {
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 20px;
-}
-.faq-section p {
-    font-weight: 300;
-    font-size: 16px;
 }
 
 .cart-products-section .cart-item .top span {
@@ -1343,28 +1333,6 @@ body {
 }
 .faq-section h1 {
     margin-bottom: 20px;
-}
-.faq-section .faq-item {
-    padding: 30px;
-    box-shadow:
-        rgba(17, 17, 26, 0.05) 0px 1px 0px,
-        rgba(17, 17, 26, 0.1) 0px 0px 8px;
-}
-.faq-section .faq-item h5 {
-    cursor: pointer;
-    margin: 0;
-}
-.faq-section .faq-item .answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
-}
-.faq-section .faq-item p {
-    margin: 0;
-    margin-top: 20px;
-}
-.faq-section .faq-item .active {
-    max-height: 300px;
 }
 
 .wishlist-products-section {
