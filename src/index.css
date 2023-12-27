@@ -417,10 +417,11 @@ body {
 .loginregister-section form .forgotpassword {
     color: black;
 }
-.loginregister-section form .bottom {
+.loginregister-section .bottom {
+    margin-top: 20px;
     color: gray;
 }
-.loginregister-section form .here {
+.loginregister-section .here {
     text-decoration: underline;
 }
 
