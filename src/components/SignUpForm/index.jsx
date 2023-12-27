@@ -1,8 +1,12 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../../redux/reducers/usersSlice';
 
 export const SignUpForm = () => {
+    const dispatch=useDispatch();
+    const users=useSelector(state=>state.users)
     const {
         register,
         handleSubmit,
@@ -11,8 +15,10 @@ export const SignUpForm = () => {
         criteriaMode: 'all'
     });
 
+
     const onSubmit = (data) => {
         console.log(data);
+        dispatch(addUser(data))
     };
 
     const renderErrorMessages = (messages) => {
@@ -28,6 +34,7 @@ export const SignUpForm = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="col-lg-6 col-12">
             <label htmlFor="firstname">First Name</label>
+            {JSON.stringify(users)}
             <input
                 className='textinp col-12 col-lg-12'
                 {...register("firstname", {
