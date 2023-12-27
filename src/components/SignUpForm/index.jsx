@@ -7,7 +7,7 @@ import axios from 'axios';
 
 export const SignUpForm = () => {
     const dispatch = useDispatch();
-    const users = useSelector(state => state.users)
+    const users = useSelector(state => state.users.users)
     const {
         register,
         handleSubmit,
@@ -18,8 +18,13 @@ export const SignUpForm = () => {
 
 
     const onSubmit = async (data) => {
+        const { email } = data;
+        const isUserExist = users.some(user => user.email === email);
+        if(isUserExist){
+            return
+        }
         try {
-            const response = await axios.post('http://localhost:3001/users',data);
+            const response = await axios.post('http://localhost:3001/users', data);
             dispatch(addUser(response.data))
         } catch (error) {
             console.log('Registration failed:', error);
