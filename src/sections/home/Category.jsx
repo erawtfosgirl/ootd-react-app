@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation } from 'swiper/modules'
+import { Autoplay, Navigation } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 
 import { categoryData } from '../../db/categoryData'
 import { CategoryItem } from '../../components/CategoryItem'
@@ -23,8 +22,13 @@ export const Category = () => {
                 <Swiper
                     slidesPerView={2}
                     spaceBetween={10}
-                    navigation
-                    modules={[Navigation]}
+                    loop={true}
+                    navigation={true}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[Autoplay, Navigation]}
                     breakpoints={{
                         640: {
                             slidesPerView: 2,

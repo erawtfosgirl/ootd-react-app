@@ -36,7 +36,7 @@ a {
     background: #555;
 }
 
-.swiper-pagination-bullet-active {
+.slider-section .swiper-pagination-bullet-active {
     background: white !important;
 }
 

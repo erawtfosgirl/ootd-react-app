@@ -101,7 +101,7 @@ export const productData = [
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
         "colors": ["white", "tan"],
-        "category": "Sweatshirts & Hoodies",
+        "category": "Sweatshirts",
         "thumbnail": product3_1,
         "images": [
             product3_1,
@@ -159,7 +159,7 @@ export const productData = [
         "material": "Cotton Knit Fabric The best cotton, smooth, comfortable, absorb sweat and not shiny",
         "sizes": ["XS", "S", "M", "L", "XL"],
         "colors": ["black", "gray"],
-        "category": "Sweatshirts & Hoodies",
+        "category": "Sweatshirts",
         "thumbnail": product6_1,
         "images": [
             product6_1,

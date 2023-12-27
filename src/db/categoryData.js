@@ -4,6 +4,7 @@ import category3 from "../assets/images/categories/8917873033_2_1_1.jpg"
 import category4 from "../assets/images/categories/3009210303_2_1_1.jpg"
 import category5 from "../assets/images/categories/8820321800_2_1_1.jpg"
 import category6 from "../assets/images/categories/6011210814_2_1_1.jpg"
+import category7 from "../assets/images/categories/8417803803_2_1_1.jpg"
 
 export const categoryData = [
     {
@@ -38,7 +39,7 @@ export const categoryData = [
     },
     {
         "id": 7,
-        "name": "Sweatshirts & Hoodies",
-        "image": category1
+        "name": "Sweatshirts",
+        "image": category7
     }
 ]
