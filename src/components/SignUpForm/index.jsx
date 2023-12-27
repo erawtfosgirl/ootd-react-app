@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../redux/reducers/usersSlice';
+import axios from 'axios';
 
 export const SignUpForm = () => {
-    const dispatch=useDispatch();
-    const users=useSelector(state=>state.users)
+    const dispatch = useDispatch();
+    const users = useSelector(state => state.users)
     const {
         register,
         handleSubmit,
@@ -16,9 +17,13 @@ export const SignUpForm = () => {
     });
 
 
-    const onSubmit = (data) => {
-        console.log(data);
-        dispatch(addUser(data))
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:3001/users',data);
+            dispatch(addUser(response.data))
+        } catch (error) {
+            console.log('Registration failed:', error);
+        }
     };
 
     const renderErrorMessages = (messages) => {
