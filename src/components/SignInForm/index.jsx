@@ -1,20 +1,80 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addUser } from '../../redux/reducers/usersSlice';
 
 export const SignInForm = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { loading, error } = useSelector(state => state.users);
     const {
         register,
         handleSubmit,
         formState: { errors }
-    } = useForm();
+    } = useForm({
+        criteriaMode: 'all'
+    });
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        dispatch(addUser(data)).then((result) => {
+            if (result.payload) {
+                navigate('/')
+            }
+        })
+    };
+
+    const renderErrorMessages = (messages) => {
+        return messages
+            ? Object.entries(messages).map(([type, message]) => (
+                <span key={type} style={{ color: 'red' }}>
+                    {message}
+                </span>
+            ))
+            : null;
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="col-lg-6 col-12">
-          
-            <button type="submit" className="btnform col-lg-12 col-12">sign in</button>
+            <label htmlFor="email">
+                Email
+                <span>*</span>
+            </label>
+            <input
+                className='textinp col-12 col-lg-12'
+                {...register("email", {
+                    required: "Email is required.",
+                    pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: "Please enter a valid email address."
+                    }
+                })}
+            />
+            <ErrorMessage
+                errors={errors}
+                name="email"
+                render={({ messages }) => renderErrorMessages(messages)}
+            />
+            <label htmlFor="password">
+                Password
+                <span>*</span>
+            </label>
+            <input
+                className='textinp col-12 col-lg-12'
+                {...register("password", {
+                    required: "Password is required.",
+                    pattern: {
+                        value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/,
+                        message: "Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one digit, and one special character."
+                    }
+                })}
+            />
+            <ErrorMessage
+                errors={errors}
+                name="password"
+                render={({ messages }) => renderErrorMessages(messages)}
+            />
+            <button type="submit" className="btnform col-lg-12 col-12">{loading ? 'Loading...' : 'Sign in'}</button>
         </form>
     )
 }

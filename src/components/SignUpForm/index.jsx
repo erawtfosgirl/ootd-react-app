@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addUser } from '../../redux/reducers/usersSlice';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserProvider';
 
 export const SignUpForm = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
-    const users = useSelector(state => state.users.users)
+    const {setCheckUser}=useContext(UserContext)
+
     const {
         register,
         handleSubmit,
@@ -18,17 +21,10 @@ export const SignUpForm = () => {
 
 
     const onSubmit = async (data) => {
-        const { email } = data;
-        const isUserExist = users.some(user => user.email === email);
-        if(isUserExist){
-            return
-        }
-        try {
-            const response = await axios.post('http://localhost:3001/users', data);
-            dispatch(addUser(response.data))
-        } catch (error) {
-            console.log('Registration failed:', error);
-        }
+        const newUser={...data,isAdmin:false}
+        setCheckUser(newUser)
+        dispatch(addUser(newUser));
+        navigate('/signin')
     };
 
     const renderErrorMessages = (messages) => {
@@ -44,7 +40,7 @@ export const SignUpForm = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="col-lg-6 col-12">
             <label htmlFor="firstname">First Name</label>
-            {JSON.stringify(users)}
+            {/* {JSON.stringify(users)} */}
             <input
                 className='textinp col-12 col-lg-12'
                 {...register("firstname", {

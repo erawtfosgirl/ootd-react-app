@@ -1,16 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios"
+
+const BASE_URL = " http://localhost:3001";
+
+export const addUser = createAsyncThunk("addUser", async (userCredentials) => {
+    const res = await axios.post(`${BASE_URL}/users`, userCredentials);
+    return res.data;
+})
 
 export const usersSlice = createSlice({
     name: 'users',
     initialState: {
-        users:[]
-    },
-    reducers: {
-        addUser: (state, action) => {
-            state.users.push(action.payload);
-        }
+        users: [],
+        loading: false,
+        error: ""
     }
 })
 
-export const { addUser } = usersSlice.actions;
 export default usersSlice.reducer;
