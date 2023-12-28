@@ -4,13 +4,13 @@ export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const [checkUser, setCheckUserState] = useState(() => {
-        const savedCheckUser = localStorage.getItem("checkUser");
+        const savedCheckUser = localStorage.getItem("user");
         return savedCheckUser ? JSON.parse(savedCheckUser) : null;
     });
 
     const setCheckUser = (newCheckUser) => {
         setCheckUserState(newCheckUser);
-        localStorage.setItem("checkUser", JSON.stringify(newCheckUser));
+        localStorage.setItem("user", JSON.stringify(newCheckUser));
     };
 
     const providerValue = {

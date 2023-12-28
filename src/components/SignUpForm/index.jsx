@@ -40,7 +40,6 @@ export const SignUpForm = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="col-lg-6 col-12">
             <label htmlFor="firstname">First Name</label>
-            {/* {JSON.stringify(users)} */}
             <input
                 className='textinp col-12 col-lg-12'
                 {...register("firstname", {

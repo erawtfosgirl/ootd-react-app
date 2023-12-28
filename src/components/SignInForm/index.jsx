@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addUser } from '../../redux/reducers/usersSlice';
+import { UserContext } from '../../context/UserProvider';
+import { Alert, Stack } from '@mui/material';
 
 export const SignInForm = () => {
+    const { setCheckUser } = useContext(UserContext);
+    const users = useSelector(state => state.users.data);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const { loading, error } = useSelector(state => state.users);
+    const [error, setError] = useState(null);
+
     const {
         register,
         handleSubmit,
@@ -17,12 +20,20 @@ export const SignInForm = () => {
         criteriaMode: 'all'
     });
 
-    const onSubmit = async (data) => {
-        dispatch(addUser(data)).then((result) => {
-            if (result.payload) {
-                navigate('/')
-            }
-        })
+    const onSubmit = (data) => {
+        const { email, password } = data;
+        const checkUser = users.find(item => item.email === email && item.password === password);
+
+        if (checkUser) {
+            setCheckUser(checkUser);
+            navigate('/');
+        }
+        else {
+            setError("Email or password is incorrect!");
+            setTimeout(() => {
+                setError(null);
+            }, 2000);
+        }
     };
 
     const renderErrorMessages = (messages) => {
@@ -74,7 +85,19 @@ export const SignInForm = () => {
                 name="password"
                 render={({ messages }) => renderErrorMessages(messages)}
             />
-            <button type="submit" className="btnform col-lg-12 col-12">{loading ? 'Loading...' : 'Sign in'}</button>
+            {error && (
+                <Stack
+                    spacing={2}
+                    style={{
+                        width: "100%",
+                        marginTop: "20px",
+                        zIndex: "5555",
+                    }}
+                >
+                    <Alert severity="error">{error}</Alert>
+                </Stack>
+            )}
+            <button type="submit" className="btnform col-lg-12 col-12">Sign in</button>
         </form>
     )
 }
