@@ -1,14 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserProvider';
 import { Alert, Stack } from '@mui/material';
+import { getUsersData } from '../../redux/reducers/usersSlice';
 
 export const SignInForm = () => {
     const { setCheckUser } = useContext(UserContext);
-    const users = useSelector(state => state.users.data);
+    const dispatch = useDispatch();
+    const usersData = useSelector(state => state.users.data);
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
@@ -20,9 +22,14 @@ export const SignInForm = () => {
         criteriaMode: 'all'
     });
 
+    useEffect(() => {
+        dispatch(getUsersData());
+    }, [dispatch])
+    
+
     const onSubmit = (data) => {
         const { email, password } = data;
-        const checkUser = users.find(item => item.email === email && item.password === password);
+        const checkUser = usersData.find(user => user.email === email && user.password === password);
 
         if (checkUser) {
             setCheckUser(checkUser);
@@ -53,6 +60,7 @@ export const SignInForm = () => {
             </label>
             <input
                 className='textinp col-12 col-lg-12'
+                placeholder='Email'
                 {...register("email", {
                     required: "Email is required.",
                     pattern: {
@@ -72,6 +80,7 @@ export const SignInForm = () => {
             </label>
             <input
                 className='textinp col-12 col-lg-12'
+                placeholder='Password'
                 {...register("password", {
                     required: "Password is required.",
                     pattern: {

@@ -33,6 +33,7 @@ export const usersSlice = createSlice({
                 state.loading = false;
                 state.error = "Data not Found";
             })
+
     }
 })
 

@@ -42,6 +42,7 @@ export const SignUpForm = () => {
             <label htmlFor="firstname">First Name</label>
             <input
                 className='textinp col-12 col-lg-12'
+                placeholder='Firstname'
                 {...register("firstname", {
                     required: "Firstname is required.",
                     pattern: {
@@ -58,6 +59,7 @@ export const SignUpForm = () => {
             <label htmlFor="lastname">Last Name</label>
             <input
                 className='textinp col-12 col-lg-12'
+                placeholder='Lastname'
                 {...register("lastname", {
                     required: "Lastname is required.",
                     pattern: {
@@ -77,6 +79,7 @@ export const SignUpForm = () => {
             </label>
             <input
                 className='textinp col-12 col-lg-12'
+                placeholder='Email'
                 {...register("email", {
                     required: "Email is required.",
                     pattern: {
@@ -96,6 +99,7 @@ export const SignUpForm = () => {
             </label>
             <input
                 className='textinp col-12 col-lg-12'
+                placeholder='Password'
                 {...register("password", {
                     required: "Password is required.",
                     pattern: {

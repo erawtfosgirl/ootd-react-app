@@ -1,20 +1,5 @@
 {
   "users": [
-    {
-      "firstname": "Vefa",
-      "lastname": "Ferzeliyeva",
-      "email": "vefaferzeliyeva11@gmail.com",
-      "password": "V*efa2001",
-      "isAdmin": false,
-      "id": 1
-    },
-    {
-      "firstname": "Edi",
-      "lastname": "Rodriguez",
-      "email": "edi1234@gmail.com",
-      "password": "Edi1234*",
-      "isAdmin": false,
-      "id": 2
-    }
+   
   ]
 }
