@@ -1,17 +1,16 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-    const [checkUser, setCheckUserState] = useState(() => {
+    const [checkUser, setCheckUser] = useState(() => {
         const savedCheckUser = localStorage.getItem("user");
         return savedCheckUser ? JSON.parse(savedCheckUser) : null;
     });
 
-    const setCheckUser = (newCheckUser) => {
-        setCheckUserState(newCheckUser);
-        localStorage.setItem("user", JSON.stringify(newCheckUser));
-    };
+    useEffect(() => {
+        localStorage.setItem("user", JSON.stringify(checkUser));
+    }, [checkUser])
 
     const providerValue = {
         checkUser,
