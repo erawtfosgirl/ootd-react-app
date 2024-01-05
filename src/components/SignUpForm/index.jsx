@@ -4,7 +4,7 @@ import { ErrorMessage } from "@hookform/error-message";
 
 
 export const SignUpForm = () => {
- 
+
     const {
         register,
         handleSubmit,
@@ -30,12 +30,12 @@ export const SignUpForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="col-lg-6 col-12">
-            <label htmlFor="firstname">First Name</label>
             <input
+                type='text'
                 className='textinp col-12 col-lg-12'
-                placeholder='Firstname'
+                placeholder='First Name'
                 {...register("firstname", {
-                    required: "Firstname is required.",
+                    required: "First name is required.",
                     pattern: {
                         value: /^[A-Za-z]+$/,
                         message: "First name must contain only letters."
@@ -47,12 +47,12 @@ export const SignUpForm = () => {
                 name="firstname"
                 render={({ messages }) => renderErrorMessages(messages)}
             />
-            <label htmlFor="lastname">Last Name</label>
             <input
+                type='text'
                 className='textinp col-12 col-lg-12'
-                placeholder='Lastname'
+                placeholder='Last Name'
                 {...register("lastname", {
-                    required: "Lastname is required.",
+                    required: "Last name is required.",
                     pattern: {
                         value: /^[A-Za-z]+$/,
                         message: "Last name must contain only letters."
@@ -64,10 +64,7 @@ export const SignUpForm = () => {
                 name="lastname"
                 render={({ messages }) => renderErrorMessages(messages)}
             />
-            <label htmlFor="email">
-                Email
-                <span>*</span>
-            </label>
+
             <input
                 type='email'
                 className='textinp col-12 col-lg-12'
@@ -85,10 +82,7 @@ export const SignUpForm = () => {
                 name="email"
                 render={({ messages }) => renderErrorMessages(messages)}
             />
-            <label htmlFor="password">
-                Password
-                <span>*</span>
-            </label>
+
             <input
                 type='password'
                 className='textinp col-12 col-lg-12'

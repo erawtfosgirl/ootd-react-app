@@ -28,11 +28,8 @@ export const SignInForm = () => {
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="col-lg-6 col-12">
-            <label htmlFor="email">
-                Email
-                <span>*</span>
-            </label>
             <input
+                type='email'
                 className='textinp col-12 col-lg-12'
                 placeholder='Email'
                 {...register("email", {
@@ -48,11 +45,8 @@ export const SignInForm = () => {
                 name="email"
                 render={({ messages }) => renderErrorMessages(messages)}
             />
-            <label htmlFor="password">
-                Password
-                <span>*</span>
-            </label>
             <input
+                type='password'
                 className='textinp col-12 col-lg-12'
                 placeholder='Password'
                 {...register("password", {
