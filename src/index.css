@@ -2042,7 +2042,7 @@ body {
     font-weight: 300;
     font-size: 14px;
     color: black;
-    padding: 5px 10px;
+    padding: 10px;
     border-bottom: 1px solid rgba(209, 209, 209, 0.658);
 }
 .user .dropdown li:last-child {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 import { ReactComponent as LogoSvg } from '../../assets/icons/logo.svg'
@@ -10,9 +10,7 @@ import { ReactComponent as SearchSvg } from '../../assets/icons/search.svg'
 
 import { MobileSidebar } from '../../components/MobileSidebar'
 import { Search } from '../../components/Search'
-import { useDispatch, useSelector } from 'react-redux'
-import { getUsersData } from '../../redux/reducers/usersSlice'
-import { UserContext } from '../../context/UserProvider'
+import { useSelector } from 'react-redux'
 
 
 export const Header = () => {
@@ -21,13 +19,11 @@ export const Header = () => {
   const [isSearchAreaOpen, setIsSearchAreaOpen] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false); // State to manage input focus
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
-  const { checkUser } = useContext(UserContext);
   const dropdownRef = useRef(null);
 
   const { pathname } = useLocation(); // Get current location from React Router
   const isHomePage = pathname === '/'; // Check if it's the home page
 
-  const dispatch = useDispatch();
   const basket = useSelector(state => state.basket);
 
   const openSearch = () => {
@@ -131,22 +127,29 @@ export const Header = () => {
             <div className="user" onClick={toggleDropdown} ref={dropdownRef}>
               <UserSvg />
               <ul className={`dropdown ${isOpenDropdown ? 'active-dropdown' : ''}`}>
-                <li>
-                  <NavLink to="/signin">
-                    Sign in
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/signup">
-                    Create an account
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/profile">
-                    My profile
-                  </NavLink>
-                </li>
-                <li>Log out</li>
+                {true ? (
+                  <>
+                    <li>
+                      <NavLink to="/profile">
+                        My profile
+                      </NavLink>
+                    </li>
+                    <li>Log out</li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <NavLink to="/signin">
+                        Sign in
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/signup">
+                        Create an account
+                      </NavLink>
+                    </li>
+                  </>
+                )}
               </ul>
 
             </div>

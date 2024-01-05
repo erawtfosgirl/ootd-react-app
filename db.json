@@ -1,12 +1,4 @@
 {
   "users": [
-    {
-      "firstname": "Edi",
-      "lastname": "Rodrigues",
-      "email": "edi1234@gmail.com",
-      "password": "Edi*1234",
-      "isAdmin": false,
-      "id": 1
-    }
   ]
 }

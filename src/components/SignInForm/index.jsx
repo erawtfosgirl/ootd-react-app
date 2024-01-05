@@ -1,18 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../context/UserProvider';
-import { Alert, Stack } from '@mui/material';
-import { getUsersData } from '../../redux/reducers/usersSlice';
 
 export const SignInForm = () => {
-    const { setCheckUser } = useContext(UserContext);
-    const dispatch = useDispatch();
-    const usersData = useSelector(state => state.users.data);
-    const navigate = useNavigate();
-    const [error, setError] = useState(null);
 
     const {
         register,
@@ -23,22 +13,8 @@ export const SignInForm = () => {
     });
 
 
-    
-
     const onSubmit = (data) => {
-        const { email, password } = data;
-        const checkUser = usersData.find(user => user.email === email && user.password === password);
-
-        if (checkUser) {
-            setCheckUser(checkUser);
-            navigate('/');
-        }
-        else {
-            setError("Email or password is incorrect!");
-            setTimeout(() => {
-                setError(null);
-            }, 2000);
-        }
+        console.log(data);
     };
 
     const renderErrorMessages = (messages) => {
@@ -92,18 +68,6 @@ export const SignInForm = () => {
                 name="password"
                 render={({ messages }) => renderErrorMessages(messages)}
             />
-            {error && (
-                <Stack
-                    spacing={2}
-                    style={{
-                        width: "100%",
-                        marginTop: "20px",
-                        zIndex: "5555",
-                    }}
-                >
-                    <Alert severity="error">{error}</Alert>
-                </Stack>
-            )}
             <button type="submit" className="btnform col-lg-12 col-12">Sign in</button>
         </form>
     )

@@ -1,16 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useDispatch } from 'react-redux';
-import { addUser } from '../../redux/reducers/usersSlice';
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../../context/UserProvider';
+
 
 export const SignUpForm = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const {setCheckUser}=useContext(UserContext)
-
+ 
     const {
         register,
         handleSubmit,
@@ -21,10 +15,7 @@ export const SignUpForm = () => {
 
 
     const onSubmit = async (data) => {
-        const newUser={...data,isAdmin:false}
-        setCheckUser(newUser)
-        dispatch(addUser(newUser));
-        navigate('/signin')
+        console.log(data);
     };
 
     const renderErrorMessages = (messages) => {
@@ -78,6 +69,7 @@ export const SignUpForm = () => {
                 <span>*</span>
             </label>
             <input
+                type='email'
                 className='textinp col-12 col-lg-12'
                 placeholder='Email'
                 {...register("email", {
@@ -98,6 +90,7 @@ export const SignUpForm = () => {
                 <span>*</span>
             </label>
             <input
+                type='password'
                 className='textinp col-12 col-lg-12'
                 placeholder='Password'
                 {...register("password", {
