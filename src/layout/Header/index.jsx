@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 
 import { ReactComponent as LogoSvg } from '../../assets/icons/logo.svg'
@@ -10,7 +10,9 @@ import { ReactComponent as SearchSvg } from '../../assets/icons/search.svg'
 
 import { MobileSidebar } from '../../components/MobileSidebar'
 import { Search } from '../../components/Search'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUsersData } from '../../redux/reducers/usersSlice'
+import { UserContext } from '../../context/UserProvider'
 
 
 export const Header = () => {
@@ -18,11 +20,15 @@ export const Header = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isSearchAreaOpen, setIsSearchAreaOpen] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false); // State to manage input focus
+  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
+  const { checkUser } = useContext(UserContext);
+  const dropdownRef = useRef(null);
 
   const { pathname } = useLocation(); // Get current location from React Router
   const isHomePage = pathname === '/'; // Check if it's the home page
 
-  const basket = useSelector(state => state.basket)
+  const dispatch = useDispatch();
+  const basket = useSelector(state => state.basket);
 
   const openSearch = () => {
     setIsSearchAreaOpen(true)
@@ -35,6 +41,28 @@ export const Header = () => {
     setIsSearchAreaOpen(false)
     setIsInputFocused(false)
   };
+
+  const toggleDropdown = () => {
+    setIsOpenDropdown(!isOpenDropdown);
+  }
+
+  const closeDropdown = () => {
+    setIsOpenDropdown(false);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,12 +126,29 @@ export const Header = () => {
               <NavLink to="/cart">
                 <CartSvg />
               </NavLink>
-              {basket.length>0 && <span className='cart-count'>{basket.length}</span>}
+              {basket.length > 0 && <span className='cart-count'>{basket.length}</span>}
             </div>
-            <div className="user">
-              <NavLink to="/signin">
-                <UserSvg />
-              </NavLink>
+            <div className="user" onClick={toggleDropdown} ref={dropdownRef}>
+              <UserSvg />
+              <ul className={`dropdown ${isOpenDropdown ? 'active-dropdown' : ''}`}>
+                <li>
+                  <NavLink to="/signin">
+                    Sign in
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/signup">
+                    Create an account
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/profile">
+                    My profile
+                  </NavLink>
+                </li>
+                <li>Log out</li>
+              </ul>
+
             </div>
             <div className="hamburger" onClick={() => setIsMobileSidebarOpen(true)}>
               <MenuSvg />

@@ -22,9 +22,7 @@ export const SignInForm = () => {
         criteriaMode: 'all'
     });
 
-    useEffect(() => {
-        dispatch(getUsersData());
-    }, [dispatch])
+
     
 
     const onSubmit = (data) => {

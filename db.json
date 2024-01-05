@@ -4,17 +4,9 @@
       "firstname": "Edi",
       "lastname": "Rodrigues",
       "email": "edi1234@gmail.com",
-      "password": "Edi@1234",
+      "password": "Edi*1234",
       "isAdmin": false,
       "id": 1
-    },
-    {
-      "firstname": "Vefa",
-      "lastname": "Ferzeliyeva",
-      "email": "vefa1234@gmail.com",
-      "password": "Vefa123@",
-      "isAdmin": false,
-      "id": 2
     }
   ]
 }

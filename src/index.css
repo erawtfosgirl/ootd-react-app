@@ -1645,7 +1645,7 @@ body {
     gap: 10px;
     margin: 20px 0;
 }
-.shop-products-section .noresultbox{
+.shop-products-section .noresultbox {
     height: 50vh;
     display: flex;
     justify-content: center;
@@ -1720,12 +1720,12 @@ body {
 .filter-options-content .categorylabel input:checked ~ .checkmark {
     background-color: darkgray;
 }
-.filter-options-content .categorylabel .checkmark::after{
+.filter-options-content .categorylabel .checkmark::after {
     content: "";
     position: absolute;
     display: none;
 }
-.filter-options-content .categorylabel input:checked ~ .checkmark::after{
+.filter-options-content .categorylabel input:checked ~ .checkmark::after {
     display: block;
 }
 .filter-options-content .categorylabel .checkmark::after {
@@ -2017,4 +2017,42 @@ body {
 
 .swiper-slide .product-item {
     width: 100%;
+}
+
+.user {
+    position: relative;
+    cursor: pointer;
+}
+.user .dropdown {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    display: block !important;
+    background-color: white;
+    box-shadow:
+        rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    top: 50px;
+    right: -50px;
+    width: 150px;
+    z-index: 1;
+    transition: all .2s;
+}
+.user .dropdown li {
+    font-weight: 300;
+    font-size: 14px;
+    color: black;
+    padding: 5px 10px;
+    border-bottom: 1px solid rgba(209, 209, 209, 0.658);
+}
+.user .dropdown li:last-child {
+    border-bottom: none;
+}
+.user .dropdown li a {
+    color: black;
+}
+.active-dropdown {
+    visibility: visible !important;
+    opacity: 1 !important;
+    top: 35px !important;
 }
